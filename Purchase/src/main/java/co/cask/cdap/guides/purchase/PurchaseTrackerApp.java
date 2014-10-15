@@ -19,7 +19,7 @@ import co.cask.cdap.api.app.AbstractApplication;
 import co.cask.cdap.api.data.stream.Stream;
 
 /**
- * This implements a simple purchase tracking application via a custom DataSet --
+ * This implements a simple purchase tracking application via a custom Dataset --
  * see package-info for more details.
  */
 public class PurchaseTrackerApp extends AbstractApplication {

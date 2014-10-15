@@ -31,10 +31,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 /**
- * This stores purchases in an embedded object store. Embedding the object store into this dataset
- * ensures that the type parameter (the Purchase class) is bundled with this dataset's code when it is
+ * This stores purchases in an embedded object store. Embedding the object store into this Dataset
+ * ensures that the type parameter (the Purchase class) is bundled with this Dataset's code when it is
  * deployed. That means a PurchaseStore can be used outside of this application, particularly for
- * querying the dataset with SQL.
+ * querying the Dataset with SQL.
  *
  * This class implements RecordScannable in order to run ad-hoc queries against it.
  */
@@ -45,10 +45,10 @@ public class PurchaseStore extends AbstractDataset implements RecordScannable<Pu
 
   /**
    * These properties will be required to create the object store. We provide them here through a static
-   * method such that application code that uses this dataset does not need to be aware of the detailed
+   * method such that application code that uses this Dataset does not need to be aware of the detailed
    * properties that are expected.
    *
-   * @return the properties required to create an instance of this dataset
+   * @return the properties required to create an instance of this Dataset
    */
   public static DatasetProperties properties() {
     try {
@@ -60,7 +60,7 @@ public class PurchaseStore extends AbstractDataset implements RecordScannable<Pu
 
   /**
    * Constructor from a specification and the embedded object store. By convention,
-   * implementing this constructor allows to define this dataset type without an explicit DatasetDefinition.
+   * implementing this constructor allows to define this Dataset type without an explicit DatasetDefinition.
    *
    * @param spec the specification
    * @param objStore the embedded object store

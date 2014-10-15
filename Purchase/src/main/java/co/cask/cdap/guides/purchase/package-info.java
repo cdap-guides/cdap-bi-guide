@@ -22,7 +22,7 @@
  *   </li>
  *   <li>
  *     The PurchaseFlow reads the purchaseStream and converts every input String into a Purchase object and stores
- *     the object in the purchases DataSet.
+ *     the object in the purchases Dataset.
  *   </li>
  *   <li>
  *    You can use SQL to formulate ad-hoc queries over the purchases Dataset. This is done by
