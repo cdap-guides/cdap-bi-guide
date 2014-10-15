@@ -32,7 +32,7 @@ public class StreamReaderFlowlet extends AbstractFlowlet {
   private static final Logger LOG = LoggerFactory.getLogger(StreamReaderFlowlet.class);
   private Metrics metrics;
 
-  @UseDataSet("purchases")
+  @UseDataSet("PurchasesDataset")
   private PurchaseStore store;
 
   @ProcessInput
