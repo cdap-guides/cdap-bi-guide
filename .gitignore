@@ -1,0 +1,20 @@
+*.class
+.*.swp
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Build files
+target/
+dependency-reduced-pom.xml
+
+# Intellij Files & Dir #
+*.iml
+*.ipr
+*.iws
+.DS_Store
+./lib/
+.idea
+
