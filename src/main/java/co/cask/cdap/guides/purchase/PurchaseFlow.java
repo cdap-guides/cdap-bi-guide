@@ -31,9 +31,9 @@ public class PurchaseFlow implements Flow {
       .setName("PurchaseFlow")
       .setDescription("Reads purchase events from a stream and stores the purchases in a Dataset")
       .withFlowlets()
-        .add("reader", new ReaderFlowlet())
+        .add("sink", new PurchaseSinkFlowlet())
       .connect()
-        .fromStream("purchases").to(new ReaderFlowlet())
+        .fromStream("purchases").to("sink")
       .build();
   }
 }

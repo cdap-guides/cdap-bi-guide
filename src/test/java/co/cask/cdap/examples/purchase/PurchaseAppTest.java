@@ -63,7 +63,7 @@ public class PurchaseAppTest extends TestBase {
       }
 
       // Wait for the Flowlet to finish processing the stream events, with a timeout of at most 15 seconds
-      RuntimeMetrics metrics = RuntimeStats.getFlowletMetrics(PurchaseApp.APP_NAME, "PurchaseFlow", "reader");
+      RuntimeMetrics metrics = RuntimeStats.getFlowletMetrics(PurchaseApp.APP_NAME, "PurchaseFlow", "sink");
       metrics.waitForProcessed(purchaseEvents.size(), 15, TimeUnit.SECONDS);
 
 

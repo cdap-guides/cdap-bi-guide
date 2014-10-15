@@ -27,9 +27,9 @@ import org.slf4j.LoggerFactory;
  * This Flowlet reads events from a Stream and parses them as comma-separated values of the form
  * <customer>,<quantity>,<productId>. The event is then converted into a Purchase object and stored to a Dataset.
  */
-public class ReaderFlowlet extends AbstractFlowlet {
+public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
-  private static final Logger LOG = LoggerFactory.getLogger(ReaderFlowlet.class);
+  private static final Logger LOG = LoggerFactory.getLogger(PurchaseSinkFlowlet.class);
   private Metrics metrics;
 
   @UseDataSet("PurchasesDataset")
