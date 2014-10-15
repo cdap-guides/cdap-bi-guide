@@ -49,11 +49,11 @@ public class PurchaseTrackerAppTest extends TestBase {
 
       // Send stream events to the "purchaseStream" Stream
       ArrayList<Purchase> purchaseEvents = new ArrayList<Purchase>();
-      purchaseEvents.add(new Purchase("bob", 353, 3, System.currentTimeMillis()));
+      purchaseEvents.add(new Purchase("bob", 353, 3, 0));
       purchaseEvents.add(new Purchase("joe", 18, 1, 0));
       purchaseEvents.add(new Purchase("joe", 20, 10, 0));
-      purchaseEvents.add(new Purchase("cat", 287, 32, 0));
-      purchaseEvents.add(new Purchase("cat", 14, 2, 0));
+      purchaseEvents.add(new Purchase("kat", 287, 32, 0));
+      purchaseEvents.add(new Purchase("kat", 14, 2, 0));
 
       StreamWriter streamWriter = appManager.getStreamWriter("purchaseStream");
       for (Purchase purchase: purchaseEvents) {
