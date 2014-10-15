@@ -96,7 +96,7 @@ public class PurchaseStore extends AbstractDataset implements RecordScannable<Pu
   }
 
   /**
-   * @param key key for the purchase in question
+   * @param key key for the requested purchase
    * @return the purchase for the given key
    */
   public Purchase read(byte[] key) {
