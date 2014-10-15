@@ -22,7 +22,7 @@ import co.cask.cdap.api.data.stream.Stream;
  * This implements a simple purchase tracking application via a custom Dataset --
  * see package-info for more details.
  */
-public class PurchaseTrackerApp extends AbstractApplication {
+public class PurchaseApp extends AbstractApplication {
 
   public static final String APP_NAME = "PurchaseTrackerApp";
 
@@ -30,7 +30,7 @@ public class PurchaseTrackerApp extends AbstractApplication {
   public void configure() {
     setName(APP_NAME);
     setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
-    addStream(new Stream("purchaseStream"));
+    addStream(new Stream("purchases"));
     addFlow(new PurchaseFlow());
     createDataset("PurchasesDataset", PurchaseStore.class, PurchaseStore.properties());
   }

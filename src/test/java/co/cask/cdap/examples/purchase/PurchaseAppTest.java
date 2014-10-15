@@ -18,8 +18,8 @@ package co.cask.cdap.examples.purchase;
 import co.cask.cdap.api.data.batch.RecordScanner;
 import co.cask.cdap.api.data.batch.Split;
 import co.cask.cdap.guides.purchase.Purchase;
+import co.cask.cdap.guides.purchase.PurchaseApp;
 import co.cask.cdap.guides.purchase.PurchaseStore;
-import co.cask.cdap.guides.purchase.PurchaseTrackerApp;
 import co.cask.cdap.test.ApplicationManager;
 import co.cask.cdap.test.DataSetManager;
 import co.cask.cdap.test.RuntimeMetrics;
@@ -34,20 +34,20 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Test for {@link PurchaseTrackerApp}.
+ * Test for {@link PurchaseApp}.
  */
-public class PurchaseTrackerAppTest extends TestBase {
+public class PurchaseAppTest extends TestBase {
 
   @Test
   public void test() throws Exception {
     // Deploy the PurchaseApp application
-    ApplicationManager appManager = deployApplication(PurchaseTrackerApp.class);
+    ApplicationManager appManager = deployApplication(PurchaseApp.class);
     try {
 
       // Start PurchaseFlow
       appManager.startFlow("PurchaseFlow");
 
-      // Send stream events to the "purchaseStream" Stream
+      // Send stream events to the "purchases" Stream
       ArrayList<Purchase> purchaseEvents = new ArrayList<Purchase>();
       purchaseEvents.add(new Purchase("bob", 353, 3, 0));
       purchaseEvents.add(new Purchase("joe", 18, 1, 0));
@@ -55,7 +55,7 @@ public class PurchaseTrackerAppTest extends TestBase {
       purchaseEvents.add(new Purchase("kat", 287, 32, 0));
       purchaseEvents.add(new Purchase("kat", 14, 2, 0));
 
-      StreamWriter streamWriter = appManager.getStreamWriter("purchaseStream");
+      StreamWriter streamWriter = appManager.getStreamWriter("purchases");
       for (Purchase purchase: purchaseEvents) {
         String event = String.format("%s,%d,%d", purchase.getCustomer(), purchase.getQuantity(),
                                      purchase.getProductId());
@@ -63,8 +63,7 @@ public class PurchaseTrackerAppTest extends TestBase {
       }
 
       // Wait for the Flowlet to finish processing the stream events, with a timeout of at most 15 seconds
-      RuntimeMetrics metrics = RuntimeStats.getFlowletMetrics(PurchaseTrackerApp.APP_NAME, "PurchaseFlow",
-                                                              "StreamReaderFlowlet");
+      RuntimeMetrics metrics = RuntimeStats.getFlowletMetrics(PurchaseApp.APP_NAME, "PurchaseFlow", "reader");
       metrics.waitForProcessed(purchaseEvents.size(), 15, TimeUnit.SECONDS);
 
 

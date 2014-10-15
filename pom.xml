@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>co.cask.cdap.guides</groupId>
-  <artifactId>PurchaseTrackerApp</artifactId>
+  <artifactId>cdap-bi-guide</artifactId>
   <name>PurchaseTrackerApp</name>
   <version>1.0.0</version>
   <packaging>jar</packaging>
@@ -30,12 +30,12 @@
     <dependency>
       <groupId>co.cask.cdap</groupId>
       <artifactId>cdap-api</artifactId>
-      <version>2.5.0</version>
+      <version>2.5.1</version>
     </dependency>
     <dependency>
       <groupId>co.cask.cdap</groupId>
       <artifactId>cdap-unit-test</artifactId>
-      <version>2.5.0</version>
+      <version>2.5.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -56,7 +56,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>co.cask.cdap.guides.purchase.PurchaseTrackerApp</mainClass>
+              <mainClass>co.cask.cdap.guides.purchase.PurchaseApp</mainClass>
             </manifest>
           </archive>
           <instructions>
