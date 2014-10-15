@@ -49,7 +49,6 @@ public class Purchase {
     return productId;
   }
 
-
   public byte[] getKey() {
     String hashedKey = purchaseTime + customer + productId;
     return hashedKey.getBytes();

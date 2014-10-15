@@ -1,15 +1,15 @@
 # Purchase example
 
-Example application that reads purchase data from a Stream, and makes it available for ad-hoc querying.
+Sample CDAP Application that reads purchase events from a Stream, and makes it available for ad-hoc querying.
 
-Features introduced: Custom Dataset with ad-hoc querying capability and thus integration with a JDBC driver.
+Features introduced: Custom Dataset with ad-hoc querying capability and integration with a Business Intelligence tool.
 
   - Send events of the form "customerName,quantity,productId" to the purchaseStream.
   - The PurchaseFlow reads the purchaseStream and converts every event into a
     Purchase object and stores the object in the purchases Dataset.
   - You can use SQL to formulate ad-hoc queries over the purchases Dataset. This is done by
     a series of ``curl`` calls, as described in the RESTful API section of the Developer Guide,
-    via the cdap CLI, or the web interface.
+    via the cdap CLI, the web interface, or from a BI tool.
 
 
 

@@ -30,7 +30,7 @@ public class PurchaseApp extends AbstractApplication {
   @Override
   public void configure() {
     setName(APP_NAME);
-    setDescription("Stores purchases in a dataset which can be queried via CDAP CLI, web-interface, or a JDBC driver.");
+    setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
     addStream(new Stream("purchaseStream"));
     addFlow(new PurchaseFlow());
     createDataset("purchases", PurchaseStore.class, PurchaseStore.properties());

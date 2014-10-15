@@ -24,9 +24,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This Flowlet reads events from a Stream and parses them as sentences of the form
- * <pre><name> bought <n> <items> for $<price></pre>. The event is then converted into
- * a Purchase object and emitted. If the event does not have this form, it is dropped.
+ * This Flowlet reads events from a Stream and parses them as comma-separated values of the form
+ * <customer>,<quantity>,<productId>. The event is then converted into a Purchase object and stored to a DataSet.
  */
 public class PurchaseStreamReader extends AbstractFlowlet {
 
@@ -39,9 +38,9 @@ public class PurchaseStreamReader extends AbstractFlowlet {
   @ProcessInput
   public void process(StreamEvent event) {
     String body = new String(event.getBody().array());
-    // <name>,<quantity>,<productId>
+    // <customer>,<quantity>,<productId>
     String[] tokens =  body.split(",");
-    for (int i=0; i<tokens.length; i++) {
+    for (int i = 0; i < tokens.length; i++) {
       tokens[i] = tokens[i].trim();
     }
     if (tokens.length != 3) {

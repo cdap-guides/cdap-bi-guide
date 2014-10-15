@@ -19,7 +19,7 @@ import co.cask.cdap.api.flow.Flow;
 import co.cask.cdap.api.flow.FlowSpecification;
 
 /**
- * This is a simple Flow that consumes purchase events from a Stream and stores Purchase objects in datastore.
+ * This is a simple Flow that consumes purchase events from a Stream and stores Purchase objects in a Dataset.
  * It has only one Flowlet, which consumes events from a Stream, converts them into Purchase objects, and
  * stores them in a DataSet.
  */
@@ -29,7 +29,7 @@ public class PurchaseFlow implements Flow {
   public FlowSpecification configure() {
     return FlowSpecification.Builder.with()
       .setName("PurchaseFlow")
-      .setDescription("Reads purchase events from a stream and stores the purchases in a dataset")
+      .setDescription("Reads purchase events from a stream and stores the purchases in a DataSet")
       .withFlowlets()
         .add("reader", new PurchaseStreamReader())
       .connect()
