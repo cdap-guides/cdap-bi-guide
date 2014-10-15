@@ -32,6 +32,6 @@ public class PurchaseTrackerApp extends AbstractApplication {
     setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
     addStream(new Stream("purchaseStream"));
     addFlow(new PurchaseFlow());
-    createDataset("purchases", PurchaseStore.class, PurchaseStore.properties());
+    createDataset("PurchasesDataset", PurchaseStore.class, PurchaseStore.properties());
   }
 }

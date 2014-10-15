@@ -33,7 +33,7 @@ public class PurchaseFlow implements Flow {
       .withFlowlets()
         .add("StreamReaderFlowlet", new StreamReaderFlowlet())
       .connect()
-        .fromStream("purchaseStream").to("reader")
+        .fromStream("purchaseStream").to(new StreamReaderFlowlet())
       .build();
   }
 }
