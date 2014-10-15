@@ -19,13 +19,12 @@ import co.cask.cdap.api.app.AbstractApplication;
 import co.cask.cdap.api.data.stream.Stream;
 
 /**
- *
  * This implements a simple purchase tracking application via a custom DataSet --
  * see package-info for more details.
  */
-public class PurchaseApp extends AbstractApplication {
+public class PurchaseTrackerApp extends AbstractApplication {
 
-  public static final String APP_NAME = "PurchaseTracker";
+  public static final String APP_NAME = "PurchaseTrackerApp";
 
   @Override
   public void configure() {

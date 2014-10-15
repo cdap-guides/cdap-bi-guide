@@ -20,9 +20,9 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>PurchaseTracker</artifactId>
+  <artifactId>PurchaseTrackerApp</artifactId>
   <groupId>co.cask.cdap.guides</groupId>
-  <name>PurchaseTracker</name>
+  <name>PurchaseTrackerApp</name>
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
@@ -56,7 +56,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>co.cask.cdap.guides.purchase.PurchaseApp</mainClass>
+              <mainClass>co.cask.cdap.guides.purchase.PurchaseTrackerApp</mainClass>
             </manifest>
           </archive>
           <instructions>
