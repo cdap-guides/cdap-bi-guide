@@ -15,8 +15,6 @@
  */
 package co.cask.cdap.guides.purchase;
 
-import java.nio.ByteBuffer;
-
 /**
  * This class represents a purchase made by a customer. It is a very simple class and only contains
  * the name of the customer, the id of the product, product quantity, and the purchase time.
@@ -54,7 +52,7 @@ public class Purchase {
 
   public byte[] getKey() {
     String hashedKey = purchaseTime + customer + productId;
-    return ByteBuffer.allocate(hashedKey.length()).put(hashedKey.getBytes()).array();
+    return hashedKey.getBytes();
   }
 
 }

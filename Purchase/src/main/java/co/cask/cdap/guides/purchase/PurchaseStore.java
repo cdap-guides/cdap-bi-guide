@@ -15,7 +15,6 @@
  */
 package co.cask.cdap.guides.purchase;
 
-import co.cask.cdap.api.data.batch.BatchWritable;
 import co.cask.cdap.api.data.batch.RecordScannable;
 import co.cask.cdap.api.data.batch.RecordScanner;
 import co.cask.cdap.api.data.batch.Scannables;
@@ -37,12 +36,9 @@ import java.util.List;
  * deployed. That means a PurchaseStore can be used outside of this application, particularly for
  * querying the dataset with SQL.
  *
- * This class implements BatchWritable in order to be able to write to it from Map/Reduce, and RecordScannable
- * in order to run ad-hoc queries against it.
+ * This class implements RecordScannable in order to run ad-hoc queries against it.
  */
-public class PurchaseStore
-  extends AbstractDataset
-  implements RecordScannable<Purchase>, BatchWritable<byte[], Purchase> {
+public class PurchaseStore extends AbstractDataset implements RecordScannable<Purchase> {
 
   // the embedded object store
   private final ObjectStore<Purchase> store;
@@ -90,24 +86,18 @@ public class PurchaseStore
     return Scannables.valueRecordScanner(store.createSplitReader(split));
   }
 
-  @Override // BatchWritable
-  public void write(byte[] key, Purchase purchase) {
-    store.write(key, purchase);
-  }
-
   /**
-   * Write a purchase purchase to the store. Uses the customer field of the purchase as the key.
+   * Write a purchase purchase to the store. Uses the a computed key of the purchase as the key.
    *
    * @param purchase The purchase to store.
    */
   public void write(Purchase purchase) {
-    //TODO: hash some values, to encourage (should be force) uniqueness in keys.
     store.write(purchase.getKey(), purchase);
   }
 
   /**
    * @param key key for the purchase in question
-   * @return the purchase of the given customer
+   * @return the purchase for the given key
    */
   public Purchase read(byte[] key) {
     return store.read(key);
