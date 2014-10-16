@@ -280,8 +280,8 @@ execute transformations of data coming from a variety of sources.
 
 * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the stored purchase events from CDAP.
 * The ``CSV file input`` step is another source of data, which pulls in a table from a locally defined csv file. This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
-* The ``Join Rows`` step joins the two data sources on equality of the ``product`` column, thereby creating a new table where each purchase event also has information for the pricing of the product purchased.
-* Because each purchase event can be a purchase for multiple of the same product, we use the ``Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the purchase.
+* The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the purchase event.
+* We use the ``Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the purchase.
 * The ``Sort on Customer`` simply sorts all of the rows by customer so that the next step can aggregate on price.
 * The ``Group by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This results in a table that is a mapping from customer name to a total amount spent by that customer.
 
