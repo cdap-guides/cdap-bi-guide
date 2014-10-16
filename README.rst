@@ -35,7 +35,7 @@ Application Design
 ~~~~~~~~~~~~~~~~~~
 
 In this example, we will learn how to explore purchase events using a BI Tool - Pentaho in this case. 
-We can ask questions such as "What is the total spend of a customer for a given day?"
+We can ask questions such as *"What is the total spend of a customer for a given day?"*
 
 |(AppDesign)|
 
@@ -192,7 +192,7 @@ The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
   }
 
 
-A Custom Dataset is implemented to be ``RecordScannable``, for integration with Hive queries.
+``PurchaseStore``, a custom dataset implements the interface ``RecordScannable``, for integration with Hive.
 
 .. code:: java
 
@@ -266,13 +266,15 @@ Next, we will send some sample purchase events into the stream for processing::
   cdap-cli.sh send stream purchases "Bob,   10,      apple"
 
 
-Now that purchase events have been sent to CDAP, they can be integrated with a BI tool such as
+Now that purchase events have been sent to CDAP, they can be explored with a BI tool such as
 *Pentaho Data Integration*. *Pentaho Data Integration* is an advanced, open source business intelligence tool that can
 execute transformations of data coming from a variety of sources.
 
+#. Download *Pentaho Data Integration* if not done already.
 #. Before opening the *Pentaho Data Integration* application, copy the ``co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``lib`` directory of *Pentaho Data Integration*, located at the root of the application's directory.
-#. Open *Pentaho Data Integration*.
+#. Open *Pentaho Data Integration*. 
+   Note: You may have to run it by invoking ``<data-integration-dir>/spoon.sh`` from a terminal, if it does not startup.
 #. Open ``./resources/total_spend_per_user.ktr``
 
    This has a transformation... TODO (Explain)
