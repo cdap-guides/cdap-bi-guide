@@ -1,14 +1,15 @@
 Accessing CDAP Data from BI Tools
 ==================================
 
-The Cask Data Application Platform (CDAP) Datasets provide an abstraction to store data. In this guide you will learn
-how to access data in a Dataset from a BI (Business Intelligence) Tool, allowing for ad-hoc exploration of the Dataset.
+The Cask Data Application Platform (CDAP) `Datasets <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_ provide 
+an abstraction to store data. In this guide you will learn how to access data in a Dataset 
+from a BI (Business Intelligence) Tool, allowing for ad-hoc exploration of the Dataset.
 
 What You Will Build
 -------------------
 * You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes
-  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
-  `Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
+  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and stores them into a
+  Dataset, which is then accessed from the BI Tool.
 * You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase
   events in realtime, writing the events in a Dataset.
 * You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset
@@ -33,22 +34,22 @@ free to skip the next two sections and jump right to Build & Run section.
 Application Design
 ~~~~~~~~~~~~~~~~~~
 
+In this example, we will learn how to explore purchase events using a BI Tool - Pentaho in this case. 
+We can ask questions such as "What is the total spend of a customer for a given day?"
+
 |(AppDesign)|
 
-In this example we will be building a Purchase Tracker application to explore purchase events. A purchase event
-contains:
+A purchase event consists of:
 
 * Customer
 * Quantity purchased
 * Product
 
-Purchase events are injected into `purchases` Stream. `sink` Flowlet reads events
-from the Stream and writes it into `PurchasesDataset`. The `PurchasesDataset` has Hive integration enabled,
+Purchase events are injected into ``purchases`` Stream. The ``sink`` Flowlet reads events
+from the Stream and writes it into ``PurchasesDataset``. The ``PurchasesDataset`` has Hive integration enabled,
 and can be queried from a BI tool like any regular Database table using
 `CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/dev-guide.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`_.
 
-We can then explore the purchase events using a BI Tool, Pentaho in this case. We can ask questions like - what is
-the total spend of a customer for a given day?
 
 Implementation
 ~~~~~~~~~~~~~~
@@ -90,7 +91,7 @@ application components:
 
 When it comes to handling time-based events, we need a place to receive and process the events themselves.
 CDAP provides a real-time stream processing system that is a great match for handling event streams.
-So, first, our PurchaseApp adds a new Stream `purchases`.
+So, first, our PurchaseApp adds a new Stream ``purchases``.
 
 We also need a place to store the purchase event records that we receive, so, PurchaseApp next
 creates a Dataset to store the processed data. PurchaseApp uses an ObjectStore Dataset to store the purchase events.
@@ -136,7 +137,7 @@ The purchase events are represented as a Java class.
   }
 
 
-PurchaseApp adds a `PurchaseFlow` to process data from the Stream and store it into Dataset.
+PurchaseApp adds a ``PurchaseFlow`` to process data from the Stream and store it into Dataset.
 
 .. code:: java
 
@@ -156,7 +157,7 @@ PurchaseApp adds a `PurchaseFlow` to process data from the Stream and store it i
   }
 
 
-The `PurchaseFlow` consists of a `PurchaseSinkFlowlet`.
+The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
 
 .. code:: java
 
@@ -191,7 +192,7 @@ The `PurchaseFlow` consists of a `PurchaseSinkFlowlet`.
   }
 
 
-A Custom Dataset is implemented to be RecordScannable, for integration with Hive queries.
+A Custom Dataset is implemented to be ``RecordScannable``, for integration with Hive queries.
 
 .. code:: java
 
@@ -241,11 +242,11 @@ A Custom Dataset is implemented to be RecordScannable, for integration with Hive
 Build & Run
 -----------
 
-The PurchaseApp application can be built and packaged using standard Apache Maven commands::
+The ``PurchaseApp`` application can be built and packaged using standard Apache Maven commands::
 
   mvn clean package
 
-Note that the remaining commands assume that the cdap-cli.sh script is available on your PATH.
+Note that the remaining commands assume that the ``cdap-cli.sh`` script is available on your PATH.
 If this is not the case, please add it::
 
   export PATH=$PATH:<CDAP home>/bin
@@ -284,8 +285,6 @@ execute transformations of data coming from a variety of sources.
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the final data.
 
    .. image:: docs/images/preview-data.png
-
-
 
 
 Congratulations!  You have now learned how to explore CDAP Datasets from a BI tool.
