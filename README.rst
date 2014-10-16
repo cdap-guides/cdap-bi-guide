@@ -136,7 +136,7 @@ The purchase events are represented as a Java class.
   }
 
 
-Finally, PurchaseApp adds a Flow to process data from the Stream and store it into Dataset.
+PurchaseApp adds a `PurchaseFlow` to process data from the Stream and store it into Dataset.
 
 .. code:: java
 
@@ -155,6 +155,8 @@ Finally, PurchaseApp adds a Flow to process data from the Stream and store it in
     }
   }
 
+
+The `PurchaseFlow` consists of a `PurchaseSinkFlowlet`.
 
 .. code:: java
 
@@ -188,6 +190,8 @@ Finally, PurchaseApp adds a Flow to process data from the Stream and store it in
     }
   }
 
+
+A Custom Dataset is implemented to be RecordScannable, for integration with Hive queries.
 
 .. code:: java
 
