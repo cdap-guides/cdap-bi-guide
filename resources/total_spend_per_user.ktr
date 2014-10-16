@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Untitled</name>
+    <name>Total Spend per Customer</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -224,7 +225,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>purchase_cost</field_name>
+       <calculation><field_name>total_spend</field_name>
 <calc_type>MULTIPLY</calc_type>
 <field_a>cdap_user_purchasesdataset.quantity</field_a>
 <field_b>price</field_b>
@@ -272,8 +273,8 @@
       </group>
       <fields>
         <field>
-          <aggregate>purchase_cost</aggregate>
-          <subject>purchase_cost</subject>
+          <aggregate>total_spend</aggregate>
+          <subject>total_spend</subject>
           <type>SUM</type>
           <valuefield/>
         </field>
