@@ -6,14 +6,13 @@ how to access data in a Dataset from a BI (Business Intelligence) Tool, allowing
 
 What You Will Build
 -------------------
-
-* You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes 
-  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
-  `Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
+* You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes
+purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
+`Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
 * You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase
-  events in realtime, writing the events in a Dataset.
+events in realtime, writing the events in a Dataset.
 * You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset
-  and product catalog - a local data source in the BI tool.
+and product catalog - a local data source in the BI tool.
 
 What You Will Need
 ------------------
@@ -262,7 +261,7 @@ Next, we will send some sample purchase events into the stream for processing::
 
 <TBD>
 
-Congratulations!  You have now learned how to explore CDAP Datasets from BI Tool.
+Congratulations!  You have now learned how to explore CDAP Datasets from a BI tool.
 Please continue to experiment and extend this sample application.
 The ability to ask ad-hoc questions on data is a powerful feature for business analytics.
 
@@ -276,12 +275,12 @@ Extend This Example
 -------------------
 
 You can ask more questions like -
-  * How much sales did a product do in a day?
-  * What are the top three most popular products?
+  * How much revenue does a particular product earn in a day?
+  * What are the three most popular products?
 
-If you add zip code to the purchase event, then you can ask location based questions like -
-  * What are the popular products in any zip?
-  * Which locations have most revenue?
+If you add zip code to the purchase event, then you can ask region-based questions such as -
+  * Which are the popular products in any region?
+  * Which regions have the greatest revenue?
 
 Share & Discuss!
 ----------------
