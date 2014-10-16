@@ -264,7 +264,29 @@ Next, we will send some sample purchase events into the stream for processing::
   cdap-cli.sh send stream purchases "Bob,    1, watermelon"
   cdap-cli.sh send stream purchases "Bob,   10,      apple"
 
-<TBD>
+
+Now that purchase events have been sent to CDAP, they can be integrated with a BI tool such as Pentaho Data Integration.
+*Pentaho Data Integration* is an advanced, open source business intelligence tool that can execute
+transformations of data coming from various sources.
+
+#. Before opening the *Pentaho Data Integration* application, copy the `co.cask.cdap.cdap-explore-jdbc-<version>.jar`
+   file to the `lib` directory of *Pentaho Data Integration*, located at the root of the application's directory.
+#. Open *Pentaho Data Integration*.
+#. Open ./resources/total_spend_per_user.ktr
+
+   This has a transformation... TODO (Explain)
+
+#. Double click on the CSV file input step, and change the filename to point to ./resources/prices.csv
+
+   .. image:: docs/images/edit-csv-input-file.png
+
+#. To run this transformation, click Action -> Run.
+#. Once the transformation is done executing, click on the `Group by Customer` step to preview the final data.
+
+   .. image:: docs/images/preview-data.png
+
+
+
 
 Congratulations!  You have now learned how to explore CDAP Datasets from a BI tool.
 Please continue to experiment and extend this sample application.
