@@ -282,7 +282,8 @@ If you add zip code to the purchase event, then you can ask location based quest
   * What are the popular products in any zip?
   * Which locations have most revenue?
 
-Share & Discuss
----------------
+Share & Discuss!
+----------------
 
-TBD
+Have a question? Discuss at `CDAP User Mailing List <https://groups.google.com/forum/#!forum/cdap-user>`_
+
