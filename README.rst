@@ -20,7 +20,7 @@ What You Will Need
 * `JDK 6 or JDK 7 <http://www.oracle.com/technetwork/java/javase/downloads/index.html>`_
 * `Apache Maven 3.0+ <http://maven.apache.org/>`_
 * `CDAP SDK <http://docs.cdap.io/cdap/current/en/getstarted.html#download-and-setup>`_
-* `Pentaho <http://community.pentaho.com/>`_
+* `Pentaho Data Integration <http://community.pentaho.com/>`_
 
 Let’s Build It!
 ---------------
