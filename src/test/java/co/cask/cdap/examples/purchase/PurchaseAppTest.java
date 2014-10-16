@@ -49,16 +49,16 @@ public class PurchaseAppTest extends TestBase {
 
       // Send stream events to the "purchases" Stream
       ArrayList<Purchase> purchaseEvents = new ArrayList<Purchase>();
-      purchaseEvents.add(new Purchase("bob", 353, 3, 0));
-      purchaseEvents.add(new Purchase("joe", 18, 1, 0));
-      purchaseEvents.add(new Purchase("joe", 20, 10, 0));
-      purchaseEvents.add(new Purchase("kat", 287, 32, 0));
-      purchaseEvents.add(new Purchase("kat", 14, 2, 0));
+      purchaseEvents.add(new Purchase("bob", "apple", 3, 0));
+      purchaseEvents.add(new Purchase("joe", "pear", 1, 0));
+      purchaseEvents.add(new Purchase("joe", "banana", 10, 0));
+      purchaseEvents.add(new Purchase("kat", "watermelon", 32, 0));
+      purchaseEvents.add(new Purchase("kat", "orange", 2, 0));
 
       StreamWriter streamWriter = appManager.getStreamWriter("purchases");
       for (Purchase purchase: purchaseEvents) {
-        String event = String.format("%s,%d,%d", purchase.getCustomer(), purchase.getQuantity(),
-                                     purchase.getProductId());
+        String event = String.format("%s,%d,%s", purchase.getCustomer(), purchase.getQuantity(),
+                                     purchase.getProduct());
         streamWriter.send(event);
       }
 
@@ -87,7 +87,7 @@ public class PurchaseAppTest extends TestBase {
         Purchase dsPurchase = dsPurchases.get(i);
         Assert.assertEquals(purchaseEvent.getCustomer(), dsPurchase.getCustomer());
         Assert.assertEquals(purchaseEvent.getQuantity(), dsPurchase.getQuantity());
-        Assert.assertEquals(purchaseEvent.getProductId(), dsPurchase.getProductId());
+        Assert.assertEquals(purchaseEvent.getProduct(), dsPurchase.getProduct());
       }
 
     } finally {

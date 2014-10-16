@@ -22,13 +22,13 @@ package co.cask.cdap.guides.purchase;
 public class Purchase {
 
   private final String customer;
+  private final String product;
   private final int quantity;
-  private final int productId;
   private final long purchaseTime;
 
-  public Purchase(String customer, int productId, int quantity, long purchaseTime) {
+  public Purchase(String customer, String product, int quantity, long purchaseTime) {
     this.customer = customer;
-    this.productId =  productId;
+    this.product = product;
     this.quantity = quantity;
     this.purchaseTime = purchaseTime;
   }
@@ -45,12 +45,12 @@ public class Purchase {
     return quantity;
   }
 
-  public int getProductId() {
-    return productId;
+  public String getProduct() {
+    return product;
   }
 
   public byte[] getKey() {
-    String hashedKey = purchaseTime + customer + productId;
+    String hashedKey = purchaseTime + customer + product;
     return hashedKey.getBytes();
   }
 

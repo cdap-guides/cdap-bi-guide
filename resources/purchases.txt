@@ -1,0 +1,6 @@
+cdap-cli.sh send stream trafficEvents "Tom,    5, carrot"
+cdap-cli.sh send stream trafficEvents "Alice, 12,  apple"
+cdap-cli.sh send stream trafficEvents "Alice,  6,    car"
+cdap-cli.sh send stream trafficEvents "Bob,    2,    car"
+cdap-cli.sh send stream trafficEvents "Bob,    1,  house"
+cdap-cli.sh send stream trafficEvents "Bob,   10,  apple"
