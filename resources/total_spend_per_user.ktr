@@ -99,7 +99,7 @@
     </attributes>
   </connection>
   <connection>
-    <name>cdap&#x21;</name>
+    <name>cdap</name>
     <server/>
     <type>GENERIC</type>
     <access>Native</access>
@@ -127,7 +127,7 @@
   <order>
   <hop> <from>Calculator 3</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Group by</to><enabled>Y</enabled> </hop>
-  <hop> <from>Table input 2</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>CDAP Purchases Dataset</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>CSV file input</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Calculator 3</to><enabled>Y</enabled> </hop>
   </order>
@@ -142,7 +142,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x2f;Users&#x2f;alianwar&#x2f;dev&#x2f;cdap-bi-guide&#x2f;resources&#x2f;prices.csv</filename>
+    <filename></filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -326,7 +326,7 @@
     </step>
 
   <step>
-    <name>Table input 2</name>
+    <name>CDAP Purchases Dataset</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -336,7 +336,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>cdap&#x21;</connection>
+    <connection>cdap</connection>
     <sql>SELECT &#x2a;&#xa;FROM cdap_user_purchasesdataset&#xa;</sql>
     <limit>0</limit>
     <lookup/>
