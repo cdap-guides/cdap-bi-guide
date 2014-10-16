@@ -33,9 +33,10 @@ Application Design
 ~~~~~~~~~~~~~~~~~~
 In this example we will be building a Purchase Tracker application to explore purchase events. A purchase event
 contains -
- * Customer
- * Quantity purchased
- * Product
+
+* Customer
+* Quantity purchased
+* Product
 
 <TBD Diagram>
 
