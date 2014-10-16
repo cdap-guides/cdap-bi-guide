@@ -38,7 +38,7 @@ contains -
 * Quantity purchased
 * Product
 
-<TBD Diagram>
+|(AppDesign)|
 
 Purchase events are injected into `purchases` Stream. `sink` Flowlet reads events
 from the Stream and writes it into `PurchasesDataset`. The `PurchasesDataset` has Hive integration enabled,
@@ -286,3 +286,5 @@ Share & Discuss!
 
 Have a question? Discuss at `CDAP User Mailing List <https://groups.google.com/forum/#!forum/cdap-user>`_
 
+
+.. |(AppDesign)| image:: docs/images/PurchaseTracker.png
