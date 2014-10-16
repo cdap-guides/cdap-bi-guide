@@ -1,18 +1,18 @@
 Accessing CDAP Data from BI Tools
 ==================================
 
-The Cask Data Application Platform (CDAP) Datasets provide an abstraction to store data. In this guide you will learn
+The Cask Data Application Platform (CDAP) Datasets provide an abstraction (Datasets) to store data. In this guide, you will learn
 how to access data in a Dataset from a BI (Business Intelligence) Tool, allowing for ad-hoc exploration of the Dataset.
 
 What You Will Build
 -------------------
 * You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes
-  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
+  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store them in a
   `Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
-* You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase
+* You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes the purchase
   events in realtime, writing the events in a Dataset.
-* You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset
-  and product catalog - a local data source in the BI tool.
+* You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset with
+  the product catalog—a local data source in the BI tool.
 
 What You Will Need
 ------------------
@@ -25,36 +25,37 @@ What You Will Need
 Let’s Build It!
 ---------------
 
-Following sections will guide you through building an application from scratch.
+The following sections will guide you through building an application from scratch.
 If you are interested in deploying and running the application right away, you
-can clone its source code and binaries from this github repository. In that case feel
-free to skip the next two sections and jump right to Build & Run section.
+can clone its source code and binaries from this GitHub repository. In that case, feel
+free to skip the next two sections and jump right to the `Build and Run`_ section.
 
 Application Design
 ~~~~~~~~~~~~~~~~~~
 
 |(AppDesign)|
 
-In this example we will be building a Purchase Tracker application to explore purchase events. A purchase event
+In this example, we will be building a Purchase Tracker application to explore purchase events. A purchase event
 contains:
 
 * Customer
 * Quantity purchased
 * Product
 
-Purchase events are injected into `purchases` Stream. `sink` Flowlet reads events
-from the Stream and writes it into `PurchasesDataset`. The `PurchasesDataset` has Hive integration enabled,
-and can be queried from a BI tool like any regular Database table using
+Purchase events are injected into the `purchases` Stream. The `sink` Flowlet reads events
+from the Stream and writes them into the `PurchasesDataset`. The `PurchasesDataset` has Hive integration enabled,
+and can be queried from a BI tool, as any regular Database table, by using the
 `CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/dev-guide.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`_.
 
-We can then explore the purchase events using a BI Tool, Pentaho in this case. We can ask questions like - what is
-the total spend of a customer for a given day?
+Then, we can explore the purchase events using a BI Tool; in this case, Pentaho Data Integration. 
+We can ask questions such as “what is the total spend of a customer for a given day?”
 
 Implementation
 ~~~~~~~~~~~~~~
 
 The first step is to get our application structure set up.  We will use a standard Maven project structure for all
 of the source code files::
+
   ./LICENSE.txt
   ./pom.xml
   ./README.rst
@@ -67,8 +68,8 @@ of the source code files::
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseStore.java
   ./src/test/java/co/cask/cdap/examples/purchase/PurchaseAppTest.java
 
-The application is identified by the PurchaseApp class.
-This class extends AbstractApplication, and overrides the configure() method in order to define all of the
+The application is identified by the ``PurchaseApp`` class.
+This class extends ``AbstractApplication``, and overrides the ``configure()`` method in order to define all of the
 application components:
 
 .. code:: java
@@ -80,7 +81,7 @@ application components:
     @Override
     public void configure() {
       setName(APP_NAME);
-      setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
+      setDescription("Stores purchases in a Dataset and makes them available for ad-hoc querying.");
       addStream(new Stream("purchases"));
       addFlow(new PurchaseFlow());
       createDataset("PurchasesDataset", PurchaseStore.class, PurchaseStore.properties());
@@ -89,12 +90,12 @@ application components:
 
 
 When it comes to handling time-based events, we need a place to receive and process the events themselves.
-CDAP provides a real-time stream processing system that is a great match for handling event streams.
-So, first, our PurchaseApp adds a new Stream `purchases`.
+CDAP provides a realtime stream processing system that is a great match for handling event streams.
+So, first, our PurchaseApp adds a new Stream, called *purchases*.
 
-We also need a place to store the purchase event records that we receive, so, PurchaseApp next
-creates a Dataset to store the processed data. PurchaseApp uses an ObjectStore Dataset to store the purchase events.
-The purchase events are represented as a Java class.
+We also need a place to store the purchase event records that we receive. PurchaseApp next
+creates an ObjectStore Dataset (*PurchasesDataset*) to store the purchase events.
+The purchase events are represented as a Java class:
 
 .. code:: java
 
@@ -135,8 +136,7 @@ The purchase events are represented as a Java class.
 
   }
 
-
-PurchaseApp adds a `PurchaseFlow` to process data from the Stream and store it into Dataset.
+The ``PurchaseApp`` adds a ``PurchaseFlow`` to process data from the Stream and store it in the Dataset:
 
 .. code:: java
 
@@ -156,7 +156,7 @@ PurchaseApp adds a `PurchaseFlow` to process data from the Stream and store it i
   }
 
 
-The `PurchaseFlow` consists of a `PurchaseSinkFlowlet`.
+The ``PurchaseFlow`` contains a ``PurchaseSinkFlowlet``:
 
 .. code:: java
 
@@ -191,7 +191,8 @@ The `PurchaseFlow` consists of a `PurchaseSinkFlowlet`.
   }
 
 
-A Custom Dataset is implemented to be RecordScannable, for integration with Hive queries.
+The ``PurchaseStore`` Dataset is a Custom Dataset, implemented to be RecordScannable, 
+allowing for integration with Hive queries:
 
 .. code:: java
 
@@ -238,14 +239,14 @@ A Custom Dataset is implemented to be RecordScannable, for integration with Hive
   }
 
 
-Build & Run
------------
+Build and Run
+-------------
 
-The PurchaseApp application can be built and packaged using standard Apache Maven commands::
+The ``PurchaseApp application`` can be built and packaged using standard Apache Maven commands::
 
   mvn clean package
 
-Note that the remaining commands assume that the cdap-cli.sh script is available on your PATH.
+Note that the remaining commands assume that the ``cdap-cli.sh`` script is available on your PATH.
 If this is not the case, please add it::
 
   export PATH=$PATH:<CDAP home>/bin
@@ -264,27 +265,29 @@ Next, we will send some sample purchase events into the stream for processing::
   cdap-cli.sh send stream purchases "Bob,    1, watermelon"
   cdap-cli.sh send stream purchases "Bob,   10,      apple"
 
-<TBD>
+.. <TBD>
 
 Congratulations!  You have now learned how to explore CDAP Datasets from a BI tool.
 Please continue to experiment and extend this sample application.
 The ability to ask ad-hoc questions on data is a powerful feature for business analytics.
 
 
-Related Topics
---------------
+.. Related Topics
+.. --------------
 
-TBD
+.. TBD
 
 Extend This Example
 -------------------
 
-You can ask more questions like -
+You can ask questions such as:
+
   * How much revenue does a particular product earn in a day?
   * What are the three most popular products?
 
-If you add zip code to the purchase event, then you can ask region-based questions such as -
-  * Which are the popular products in any region?
+If you add a zip code to the purchase event, you can then ask region-based questions, such as:
+
+  * Which are the popular products in a given region?
   * Which regions have the greatest revenue?
 
 Share & Discuss!
