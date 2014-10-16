@@ -307,10 +307,10 @@ You can ask more questions like:
 * How much revenue does a particular product earn in a day?
 * What are the three most popular products?
 
-If you add zip code to the purchase event, then you can ask region-based questions such as:
+If you add zip code to the purchase event, then you can ask location-based questions such as:
 
-* Which are the popular products in any region?
-* Which regions have the greatest revenue?
+* Which are the popular products in any location?
+* Which locations have the highest revenue?
 
 Share & Discuss!
 ----------------
