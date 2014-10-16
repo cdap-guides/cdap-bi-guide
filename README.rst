@@ -75,7 +75,7 @@ application components:
 
   public class PurchaseApp extends AbstractApplication {
 
-    public static final String APP_NAME = "PurchaseTrackerApp";
+    public static final String APP_NAME = "PurchaseApp";
 
     @Override
     public void configure() {
@@ -293,4 +293,4 @@ Share & Discuss!
 Have a question? Discuss at `CDAP User Mailing List <https://groups.google.com/forum/#!forum/cdap-user>`_
 
 
-.. |(AppDesign)| image:: docs/images/PurchaseTracker.png
+.. |(AppDesign)| image:: docs/images/app-design.png
