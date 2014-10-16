@@ -7,12 +7,12 @@ how to access data in a Dataset from a BI (Business Intelligence) Tool, allowing
 What You Will Build
 -------------------
 * You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes
-purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
-`Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
+  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and store it into a
+  `Dataset <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_, which is then accessed from the BI Tool.
 * You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase
-events in realtime, writing the events in a Dataset.
+  events in realtime, writing the events in a Dataset.
 * You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset
-and product catalog - a local data source in the BI tool.
+  and product catalog - a local data source in the BI tool.
 
 What You Will Need
 ------------------
