@@ -22,7 +22,7 @@
 
   <groupId>co.cask.cdap.guides</groupId>
   <artifactId>cdap-bi-guide</artifactId>
-  <name>PurchaseTrackerApp</name>
+  <name>PurchaseApp</name>
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
