@@ -275,7 +275,7 @@ execute transformations of data coming from a variety of sources.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
 #. Open ``./resources/total_spend_per_user.ktr``
 
-   This is a Kettle Transformation file exported from Kettle Spoon (Data Integration). This file contains a
+   This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation, which has several components or ``steps``:
 
 * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as one input source. It pulls all of the stored purchase events from CDAP.
