@@ -278,7 +278,7 @@ execute transformations of data coming from a variety of sources.
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation, which has several components or ``steps``:
 
-* ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as one input source. It pulls all of the stored purchase events from CDAP.
+* ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the stored purchase events from CDAP.
 * The ``CSV file input`` step is another source of data, which pulls in a table from a locally defined csv file. This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
 * The ``Join Rows`` step joins the two data sources on equality of the ``product`` column, thereby creating a new table where each purchase event also has information for the pricing of the product purchased.
 * Because each purchase event can be a purchase for multiple of the same product, we use the ``Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the purchase.
