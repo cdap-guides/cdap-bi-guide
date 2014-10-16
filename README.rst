@@ -56,9 +56,8 @@ of the source code files::
   ./LICENSE.txt
   ./pom.xml
   ./README.rst
-  ./resources
   ./resources/prices.csv
-  ./resources/purchases.txt
+  ./resources/total_spend_per_user.ktr
   ./src/main/java/co/cask/cdap/guides/purchase/Purchase.java
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseApp.java
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseFlow.java
