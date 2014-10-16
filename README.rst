@@ -269,11 +269,11 @@ Now that purchase events have been sent to CDAP, they can be explored with a BI 
 *Pentaho Data Integration*. *Pentaho Data Integration* is an advanced, open source business intelligence tool that can
 execute transformations of data coming from a variety of sources.
 
-#. Download *Pentaho Data Integration* if not done already.
+#. Download *Pentaho Data Integration* and unzip it, if not done already.
 #. Before opening the *Pentaho Data Integration* application, copy the ``co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``lib`` directory of *Pentaho Data Integration*, located at the root of the application's directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
-#. Open ``./resources/total_spend_per_user.ktr``
+#. Open ``./resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This has a transformation... TODO (Explain)
 
@@ -281,7 +281,7 @@ execute transformations of data coming from a variety of sources.
 
    .. image:: docs/images/edit-csv-input-file.png
 
-#. To run this transformation, click Action -> Run.
+#. To run this transformation, click "Action" -> "Run".
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the final data.
 
    .. image:: docs/images/preview-data.png
