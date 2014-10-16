@@ -273,9 +273,7 @@ execute transformations of data coming from a variety of sources.
 #. Download *Pentaho Data Integration* if not done already.
 #. Before opening the *Pentaho Data Integration* application, copy the ``co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``lib`` directory of *Pentaho Data Integration*, located at the root of the application's directory.
-#. Open *Pentaho Data Integration*. 
-   
-   Note: You may have to run it by invoking ``<data-integration-dir>/spoon.sh`` from a terminal, if it does not startup.
+#. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
 #. Open ``./resources/total_spend_per_user.ktr``
 
    This has a transformation... TODO (Explain)
@@ -298,7 +296,8 @@ The ability to ask ad-hoc questions on data is a powerful feature for business a
 Related Topics
 --------------
 
-TBD
+* `Connecting to CDAP Datasets using CDAP JDBC driver <http://docs.cask.co/cdap/current/en/dev-guide.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`_
+* `Pentaho Data Integration (Kettle) Tutorial <http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+%28Kettle%29+Tutorial>`_
 
 Extend This Example
 -------------------
