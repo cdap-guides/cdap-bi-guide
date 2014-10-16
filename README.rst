@@ -242,6 +242,7 @@ Build & Run
 -----------
 
 The ``PurchaseApp`` application can be built and packaged using standard Apache Maven commands::
+(Run all commands from the source base directory)
 
   mvn clean package
 
@@ -250,12 +251,13 @@ If this is not the case, please add it::
 
   export PATH=$PATH:<CDAP home>/bin
 
-We can then deploy the application to a standalone CDAP installation::
+We can then deploy the application to a running standalone CDAP installation::
 
   cdap-cli.sh deploy app target/cdap-bi-guide-1.0.0.jar
   cdap-cli.sh start flow PurchaseApp.PurchaseFlow
 
-Next, we will send some sample purchase events into the stream for processing::
+Next, we will send some sample purchase events into the stream for processing. The purchase event consists of
+``customer name``, ``quantity purchased`` and ``product purchased``::
 
   cdap-cli.sh send stream purchases "Tom,    5,       pear"
   cdap-cli.sh send stream purchases "Alice, 12,      apple"
@@ -266,32 +268,39 @@ Next, we will send some sample purchase events into the stream for processing::
 
 
 Now that purchase events have been sent to CDAP, they can be explored with a BI tool such as
-*Pentaho Data Integration*. *Pentaho Data Integration* is an advanced, open source business intelligence tool that can
-execute transformations of data coming from a variety of sources.
+*Pentaho Data Integration*.
 
 #. Download *Pentaho Data Integration* and unzip it, if not done already.
-#. Before opening the *Pentaho Data Integration* application, copy the ``co.cask.cdap.cdap-explore-jdbc-<version>.jar``
-   file to the ``lib`` directory of *Pentaho Data Integration*, located at the root of the application's directory.
+#. Before opening the *Pentaho Data Integration* application, copy the
+   ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
+   file to the ``<data-integration-dir>/lib`` directory*.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
-#. Open ``./resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
+#. Open ``<src-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
-   transformation, which has several components or ``steps``:
+   transformation that calculates total spend of a customer based on purchase events above.
+   The transformation has several components or ``steps``:
 
-* ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the stored purchase events from CDAP.
-* The ``CSV file input`` step is another source of data, which pulls in a table from a locally defined csv file. This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
-* The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the purchase event.
-* We use the ``Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the purchase.
-* The ``Sort on Customer`` simply sorts all of the rows by customer so that the next step can aggregate on price.
-* The ``Group by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This results in a table that is a mapping from customer name to a total amount spent by that customer.
+  * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the
+    stored purchase events from CDAP.
+  * The ``Product Catalog CSV`` step is another source of data, which pulls in a table from a locally defined csv file.
+    This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
+  * The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the
+    purchase event.
+  * We use the ``Product Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the
+    purchase.
+  * The ``Sort on Customer`` simply sorts all of the rows by customer so that the next step can aggregate on price.
+  * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This
+    results in a table that is a mapping from customer name to a total amount spent by that customer.
 
 
-#. Double click on the CSV file input step, and change the filename to point to ``./resources/prices.csv``
+#. Double click on the CSV file input step, and change the filename to point to ``<src-dir>/resources/prices.csv``
 
    .. image:: docs/images/edit-csv-input-file.png
 
-#. To run this transformation, click "Action" -> "Run".
-#. Once the transformation has completed executing, click on the *Group by Customer* step to preview the final data.
+#. To run this transformation , click "Action" -> "Run" -> "Launch".
+#. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total spend
+   by customer.
 
    .. image:: docs/images/preview-data.png
 
