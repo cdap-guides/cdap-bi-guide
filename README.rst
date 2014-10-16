@@ -31,14 +31,15 @@ free to skip the next two sections and jump right to Build & Run section.
 
 Application Design
 ~~~~~~~~~~~~~~~~~~
+
+|(AppDesign)|
+
 In this example we will be building a Purchase Tracker application to explore purchase events. A purchase event
 contains -
 
 * Customer
 * Quantity purchased
 * Product
-
-|(AppDesign)|
 
 Purchase events are injected into `purchases` Stream. `sink` Flowlet reads events
 from the Stream and writes it into `PurchasesDataset`. The `PurchasesDataset` has Hive integration enabled,
