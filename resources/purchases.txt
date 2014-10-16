@@ -1,0 +1,6 @@
+Tom,    5, carrot
+Alice, 12,  apple
+Alice,  6,    car
+Bob,    2,    car
+Bob,    1,  house
+Bob,   10,  apple
