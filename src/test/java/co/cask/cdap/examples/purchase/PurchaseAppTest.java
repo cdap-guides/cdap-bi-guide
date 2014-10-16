@@ -51,9 +51,9 @@ public class PurchaseAppTest extends TestBase {
       ArrayList<Purchase> purchaseEvents = new ArrayList<Purchase>();
       purchaseEvents.add(new Purchase("bob", "apple", 3, 0));
       purchaseEvents.add(new Purchase("joe", "pear", 1, 0));
-      purchaseEvents.add(new Purchase("joe", "car", 10, 0));
-      purchaseEvents.add(new Purchase("kat", "house", 32, 0));
-      purchaseEvents.add(new Purchase("kat", "sheep", 2, 0));
+      purchaseEvents.add(new Purchase("joe", "banana", 10, 0));
+      purchaseEvents.add(new Purchase("kat", "watermelon", 32, 0));
+      purchaseEvents.add(new Purchase("kat", "orange", 2, 0));
 
       StreamWriter streamWriter = appManager.getStreamWriter("purchases");
       for (Purchase purchase: purchaseEvents) {
