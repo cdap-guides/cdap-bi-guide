@@ -49,7 +49,7 @@ public class PurchaseSinkFlowlet extends AbstractFlowlet {
     }
     String customer = tokens[0];
     int quantity = Integer.parseInt(tokens[1]);
-    int item = Integer.parseInt(tokens[2]);
+    String item = tokens[2];
 
     Purchase purchase = new Purchase(customer, item, quantity, System.currentTimeMillis());
     metrics.count("purchases." + purchase.getCustomer(), 1);
