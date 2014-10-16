@@ -24,7 +24,7 @@ import co.cask.cdap.api.data.stream.Stream;
  */
 public class PurchaseApp extends AbstractApplication {
 
-  public static final String APP_NAME = "PurchaseTrackerApp";
+  public static final String APP_NAME = "PurchaseApp";
 
   @Override
   public void configure() {
