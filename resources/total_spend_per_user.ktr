@@ -224,7 +224,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>purchase_cost</field_name>
+       <calculation><field_name>total_spend</field_name>
 <calc_type>MULTIPLY</calc_type>
 <field_a>cdap_user_purchasesdataset.quantity</field_a>
 <field_b>price</field_b>
@@ -272,8 +272,8 @@
       </group>
       <fields>
         <field>
-          <aggregate>purchase_cost</aggregate>
-          <subject>purchase_cost</subject>
+          <aggregate>total_spend</aggregate>
+          <subject>total_spend</subject>
           <type>SUM</type>
           <valuefield/>
         </field>
