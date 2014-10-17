@@ -1,19 +1,21 @@
-Accessing CDAP Data from BI Tools
+Analyzing CDAP Data from BI Tools
 ==================================
 
 The Cask Data Application Platform (CDAP) `Datasets <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_ provide
-an abstraction to store data. In this guide you will learn how to access data in a Dataset 
-from a BI (Business Intelligence) Tool, allowing for ad-hoc exploration of the Dataset.
+an abstraction to store data. In this guide you will learn how to integrate and analyze Datasets with BI (Business Intelligence) Tool.
 
 What You Will Build
 -------------------
-* You will build a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_ that consumes
-  purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_ and stores them into a
-  Dataset, which is then accessed from the BI Tool.
-* You’ll build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase
-  events in realtime, writing the events in a Dataset.
-* You’ll then access this Dataset from a BI tool to run queries by joining purchase events in the Dataset
-  and product catalog - a local data source in the BI tool.
+This guide will take you through building a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_
+that processes purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_,
+persists the results in a Dataset, and analyzes it using BI tool. You will:
+
+
+* Build a CDAP Application that consumes purchase events from a Stream and stores them into a Dataset.
+* Build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase events in
+  realtime, writing the events in a Dataset.
+* Finally, access this Dataset from a BI tool to run queries by joining purchase events in the Dataset and a
+  product catalog - a local data source in the BI tool.
 
 What You Will Need
 ------------------
@@ -62,9 +64,9 @@ of the source code files::
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseSinkFlowlet.java
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseStore.java
 
-The application is identified by the PurchaseApp class.
-This class extends AbstractApplication, and overrides the configure() method in order to define all of the
-application components:
+The application is identified by the ``PurchaseApp``  class.
+This class extends `AbstractApplication <http://docs.cdap.io/cdap/2.5.1/en/javadocs/co/cask/cdap/api/app/AbstractApplication.html>`_,
+and overrides the ``configure()`` method in order to define all of the application components:
 
 .. code:: java
 
@@ -75,7 +77,6 @@ application components:
     @Override
     public void configure() {
       setName(APP_NAME);
-      setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
       addStream(new Stream("purchases"));
       addFlow(new PurchaseFlow());
       createDataset("PurchasesDataset", PurchaseStore.class, PurchaseStore.properties());
@@ -85,17 +86,16 @@ application components:
 
 When it comes to handling time-based events, we need a place to receive and process the events themselves.
 CDAP provides a real-time stream processing system that is a great match for handling event streams.
-So, first, our PurchaseApp adds a new Stream ``purchases``.
+So, first, our ``PurchaseApp`` adds a new Stream ``purchases``.
 
-We also need a place to store the purchase event records that we receive, so, PurchaseApp next
+We also need a place to store the purchase event records that we receive, so, ``PurchaseApp`` next
 creates a Dataset to store the processed data. PurchaseApp uses an
-`ObjectStore <http://docs.cdap.io/cdap/current/en/javadocs/index.html>`_ Dataset to store the purchase events.
-The purchase events are represented as a Java class.
+`ObjectStore <http://docs.cdap.io/cdap/current/en/javadocs/index.html?co/cask/cdap/api/dataset/lib/ObjectStore.html>`_
+Dataset to store the purchase events. The purchase events are represented as a Java class, ``Purchase``.
 
 .. code:: java
 
   public class Purchase {
-
     private final String customer;
     private final String product;
     private final int quantity;
@@ -128,7 +128,6 @@ The purchase events are represented as a Java class.
       String hashedKey = purchaseTime + customer + product;
       return hashedKey.getBytes();
     }
-
   }
 
 
@@ -159,7 +158,6 @@ The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
   public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(PurchaseSinkFlowlet.class);
-    private Metrics metrics;
 
     @UseDataSet("PurchasesDataset")
     private PurchaseStore store;
@@ -181,7 +179,6 @@ The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
       String item = tokens[2];
 
       Purchase purchase = new Purchase(customer, item, quantity, System.currentTimeMillis());
-      metrics.count("purchases." + purchase.getCustomer(), 1);
       store.write(purchase);
     }
   }
@@ -237,7 +234,7 @@ The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
 Build & Run
 -----------
 
-The ``PurchaseApp`` application can be built and packaged using standard Apache Maven commands.
+The ``PurchaseApp`` application can be built and packaged using Apache Maven commands.
 Run the following commands from the project directory::
 
   mvn clean package
@@ -270,12 +267,12 @@ a ``customer name``, a ``quantity purchased`` and a ``product purchased``::
 Now that purchase events have been ingested by CDAP, they can be explored with a BI tool such as
 *Pentaho Data Integration*.
 
-#. Download *Pentaho Data Integration* and unzip it.
+#. Download `Pentaho Data Integration <http://community.pentaho.com/>`_ and unzip it.
 #. Before opening the *Pentaho Data Integration* application, copy the
-   ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
+   ``<CDAP home>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``<data-integration-dir>/lib`` directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
-#. Open ``<src-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
+#. Open ``<project-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation that calculates total spend of a customer based on purchase events above.
@@ -288,19 +285,18 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
    * The ``Sort on Customer`` sorts all of the rows by customer so that the next step can aggregate on price.
    * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This results in a table that is a mapping from customer name to a total amount spent by that customer.
 
-#. Double click on the CSV file input step, and change the filename to point to ``<src-dir>/resources/prices.csv``
+#. Double click on the CSV file input step, and change the filename to point to ``<project-dir>/resources/prices.csv``
 
    .. image:: docs/images/edit-csv-input-file.png
 
-#. To run this transformation , click "Action" -> "Run" -> "Launch".
+#. To run this transformation, click "Action" -> "Run" -> "Launch".
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
    spent by customer.
 
    .. image:: docs/images/preview-data.png
 
-Congratulations!  You have now learned how to explore CDAP Datasets from a BI tool.
+Congratulations!  You have now learned how to analyze CDAP Datasets from a BI tool.
 Please continue to experiment and extend this sample application.
-The ability to ask ad-hoc questions on data is a powerful feature for business analytics.
 
 
 Related Topics
@@ -312,7 +308,7 @@ Related Topics
 Extend This Example
 -------------------
 
-Now that you know how to integrate CDAP Datasets with BI Tools, you can ask more questions like:
+Now that you know how to integrate CDAP Datasets with BI Tools for data analysis, you can ask more questions like:
 
 * How much revenue does a particular product generate in a day?
 * What are the three most popular products?
