@@ -2,7 +2,7 @@ Analyzing CDAP Data from BI Tools
 ==================================
 
 The Cask Data Application Platform (CDAP) `Datasets <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_
-provides an abstraction to store data. In this guide you will learn how to integrate and analyze Datasets
+provide an abstraction to store data. In this guide you will learn how to integrate and analyze Datasets
 with BI (Business Intelligence) Tool.
 
 What You Will Build
