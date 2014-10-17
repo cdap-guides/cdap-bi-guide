@@ -29,7 +29,6 @@ public class PurchaseApp extends AbstractApplication {
   @Override
   public void configure() {
     setName(APP_NAME);
-    setDescription("Stores purchases in a Dataset, and makes it available for ad-hoc querying.");
     addStream(new Stream("purchases"));
     addFlow(new PurchaseFlow());
     createDataset("PurchasesDataset", PurchaseStore.class, PurchaseStore.properties());

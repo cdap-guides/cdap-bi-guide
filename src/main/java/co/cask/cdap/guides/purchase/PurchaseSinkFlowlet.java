@@ -19,7 +19,6 @@ import co.cask.cdap.api.annotation.ProcessInput;
 import co.cask.cdap.api.annotation.UseDataSet;
 import co.cask.cdap.api.flow.flowlet.AbstractFlowlet;
 import co.cask.cdap.api.flow.flowlet.StreamEvent;
-import co.cask.cdap.api.metrics.Metrics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +29,6 @@ import org.slf4j.LoggerFactory;
 public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
   private static final Logger LOG = LoggerFactory.getLogger(PurchaseSinkFlowlet.class);
-  private Metrics metrics;
 
   @UseDataSet("PurchasesDataset")
   private PurchaseStore store;
@@ -52,7 +50,6 @@ public class PurchaseSinkFlowlet extends AbstractFlowlet {
     String item = tokens[2];
 
     Purchase purchase = new Purchase(customer, item, quantity, System.currentTimeMillis());
-    metrics.count("purchases." + purchase.getCustomer(), 1);
     store.write(purchase);
   }
 }

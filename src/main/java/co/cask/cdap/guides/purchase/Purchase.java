@@ -20,7 +20,6 @@ package co.cask.cdap.guides.purchase;
  * the name of the customer, the id of the product, product quantity, and the purchase time.
  */
 public class Purchase {
-
   private final String customer;
   private final String product;
   private final int quantity;
@@ -53,5 +52,4 @@ public class Purchase {
     String hashedKey = purchaseTime + customer + product;
     return hashedKey.getBytes();
   }
-
 }
