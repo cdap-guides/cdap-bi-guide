@@ -1,15 +1,15 @@
 Analyzing CDAP Data from BI Tools
 ==================================
 
-The Cask Data Application Platform (CDAP) `Datasets <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_ provide
-an abstraction to store data. In this guide you will learn how to integrate and analyze Datasets with BI (Business Intelligence) Tool.
+The Cask Data Application Platform (CDAP) `Datasets <http://docs.cdap.io/cdap/current/en/dev-guide.html#datasets>`_
+provides an abstraction to store data. In this guide you will learn how to integrate and analyze Datasets
+with BI (Business Intelligence) Tool.
 
 What You Will Build
 -------------------
 This guide will take you through building a CDAP `Application <http://docs.cdap.io/cdap/current/en/dev-guide.html#applications>`_
 that processes purchase events from a `Stream <http://docs.cdap.io/cdap/current/en/dev-guide.html#streams>`_,
 persists the results in a Dataset, and analyzes it using BI tool. You will:
-
 
 * Build a CDAP Application that consumes purchase events from a Stream and stores them into a Dataset.
 * Build a `Flowlet <http://docs.cdap.io/cdap/current/en/dev-guide.html#flowlets>`_ that processes purchase events in
@@ -272,7 +272,7 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
    ``<CDAP home>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``<data-integration-dir>/lib`` directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
-#. Open ``<project-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
+#. Open ``<cdap-bi-guide-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation that calculates total spend of a customer based on purchase events above.
@@ -285,13 +285,13 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
    * The ``Sort on Customer`` sorts all of the rows by customer so that the next step can aggregate on price.
    * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This results in a table that is a mapping from customer name to a total amount spent by that customer.
 
-#. Double click on the CSV file input step, and change the filename to point to ``<project-dir>/resources/prices.csv``
+#. Double click on the CSV file input step, and change the filename to point to ``<cdap-bi-guide-dir>/resources/prices.csv``
 
    .. image:: docs/images/edit-csv-input-file.png
 
 #. To run this transformation, click "Action" -> "Run" -> "Launch".
-#. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
-   spent by customer.
+#. Once the transformation has completed execution, click on the ``Aggregate by Customer`` step, and then click on the
+   ``Preview Data`` tab at the bottom to view the total amount spent by customer.
 
    .. image:: docs/images/preview-data.png
 
