@@ -269,7 +269,7 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
 
 #. Download `Pentaho Data Integration <http://community.pentaho.com/>`_ and unzip it.
 #. Before opening the *Pentaho Data Integration* application, copy the
-   ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
+   ``<CDAP home>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``<data-integration-dir>/lib`` directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
 #. Open ``<project-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
@@ -294,7 +294,7 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
 
    .. image:: docs/images/edit-csv-input-file.png
 
-#. To run this transformation , click "Action" -> "Run" -> "Launch".
+#. To run this transformation, click "Action" -> "Run" -> "Launch".
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
    spent by customer.
 
