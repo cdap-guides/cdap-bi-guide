@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Untitled</name>
+    <name>Total Spend per Customer</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -68,36 +68,10 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;10&#x2f;14 22&#x3a;16&#x3a;15.734</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;10&#x2f;14 22&#x3a;16&#x3a;15.734</modified_date>
+  <modified_date>2014&#x2f;10&#x2f;16 15&#x3a;19&#x3a;08.388</modified_date>
   </info>
   <notepads>
   </notepads>
-  <connection>
-    <name>CDAP Standalone</name>
-    <server/>
-    <type>GENERIC</type>
-    <access>Native</access>
-    <database/>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>co.cask.cdap.explore.jdbc.ExploreDriver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;cdap&#x3a;&#x2f;&#x2f;localhost&#x3a;10000</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
   <connection>
     <name>cdap</name>
     <server/>
@@ -124,15 +98,67 @@
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
+  <connection>
+    <name>CDAP Standalone</name>
+    <server/>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database/>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>co.cask.cdap.explore.jdbc.ExploreDriver</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;cdap&#x3a;&#x2f;&#x2f;localhost&#x3a;10000</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Calculator 3</from><to>Sort rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>Product Cost Calculator</from><to>Sort on Customer</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort on Customer</from><to>Aggregate by Customer</to><enabled>Y</enabled> </hop>
   <hop> <from>CDAP Purchases Dataset</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Calculator 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Product Catalog CSV</from><to>Join Rows &#x28;cartesian product&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Rows &#x28;cartesian product&#x29;</from><to>Product Cost Calculator</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>CSV file input</name>
+    <name>CDAP Purchases Dataset</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>cdap</connection>
+    <sql>SELECT &#x2a;&#xa;FROM cdap_user_purchasesdataset&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>128</xloc>
+      <yloc>127</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Product Catalog CSV</name>
     <type>CsvInput</type>
     <description/>
     <distribute>N</distribute>
@@ -142,7 +168,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename></filename>
+    <filename/>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -181,14 +207,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>274</xloc>
-      <yloc>136</yloc>
+      <xloc>263</xloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Calculator 3</name>
+    <name>Product Cost Calculator</name>
     <type>Calculator</type>
     <description/>
     <distribute>N</distribute>
@@ -198,7 +224,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>purchase_cost</field_name>
+       <calculation><field_name>total_spend</field_name>
 <calc_type>MULTIPLY</calc_type>
 <field_a>cdap_user_purchasesdataset.quantity</field_a>
 <field_b>price</field_b>
@@ -214,14 +240,14 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>219</xloc>
-      <yloc>419</yloc>
+      <xloc>354</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Group by</name>
+    <name>Aggregate by Customer</name>
     <type>GroupBy</type>
     <description/>
     <distribute>Y</distribute>
@@ -246,16 +272,16 @@
       </group>
       <fields>
         <field>
-          <aggregate>purchase_cost</aggregate>
-          <subject>purchase_cost</subject>
+          <aggregate>total_spend</aggregate>
+          <subject>total_spend</subject>
           <type>SUM</type>
           <valuefield/>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>536</yloc>
+      <xloc>665</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -285,14 +311,14 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>129</xloc>
-      <yloc>282</yloc>
+      <xloc>188</xloc>
+      <yloc>269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Sort rows</name>
+    <name>Sort on Customer</name>
     <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -319,34 +345,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>343</xloc>
-      <yloc>480</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CDAP Purchases Dataset</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>cdap</connection>
-    <sql>SELECT &#x2a;&#xa;FROM cdap_user_purchasesdataset&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>122</xloc>
-      <yloc>138</yloc>
+      <xloc>512</xloc>
+      <yloc>270</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
