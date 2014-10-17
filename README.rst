@@ -294,7 +294,7 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
 
 #. To run this transformation , click "Action" -> "Run" -> "Launch".
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
-spent by customer.
+   spent by customer.
 
    .. image:: docs/images/preview-data.png
 
