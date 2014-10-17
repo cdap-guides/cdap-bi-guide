@@ -272,31 +272,31 @@ Now that purchase events have been ingested by CDAP, they can be explored with a
    ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``<data-integration-dir>/lib`` directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
-#. Open ``<src-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
+#. Open ``<project-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation that calculates total spend of a customer based on purchase events above.
    The transformation has several components or steps:
 
-  * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the
-    stored purchase events from CDAP.
-  * The ``Product Catalog CSV`` step is another source of data, which pulls in a table from a locally defined csv file.
-    This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
-  * The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the
-   purchase event.
-  * We use the ``Product Cost Calculator`` step to multiply ``purchase.quantity`` by ``price`` to get the total cost
-    for the purchase.
-  * The ``Sort on Customer`` sorts all of the rows by customer so that the next step can aggregate on price.
-  * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This
-    results in a table that is a mapping from customer name to a total amount spent by that customer.
+   * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the
+     stored purchase events from CDAP.
+   * The ``Product Catalog CSV`` step is another source of data, which pulls in a table from a locally defined csv file.
+     This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
+   * The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the
+     purchase event.
+   * We use the ``Product Cost Calculator`` step to multiply ``purchase.quantity`` by ``price`` to get the total cost
+     for the purchase.
+   * The ``Sort on Customer`` sorts all of the rows by customer so that the next step can aggregate on price.
+   * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This
+     results in a table that is a mapping from customer name to a total amount spent by that customer.
 
-#. Double click on the CSV file input step, and change the filename to point to ``<src-dir>/resources/prices.csv``
+#. Double click on the CSV file input step, and change the filename to point to ``<project-dir>/resources/prices.csv``
 
    .. image:: docs/images/edit-csv-input-file.png
 
 #. To run this transformation , click "Action" -> "Run" -> "Launch".
 #. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
-spent by customer.
+   spent by customer.
 
    .. image:: docs/images/preview-data.png
 
