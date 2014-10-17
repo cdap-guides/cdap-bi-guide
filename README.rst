@@ -93,7 +93,8 @@ CDAP provides a real-time stream processing system that is a great match for han
 So, first, our PurchaseApp adds a new Stream ``purchases``.
 
 We also need a place to store the purchase event records that we receive, so, PurchaseApp next
-creates a Dataset to store the processed data. PurchaseApp uses an ObjectStore Dataset to store the purchase events.
+creates a Dataset to store the processed data. PurchaseApp uses an
+`ObjectStore <http://docs.cdap.io/cdap/current/en/javadocs/index.html>`_ Dataset to store the purchase events.
 The purchase events are represented as a Java class.
 
 .. code:: java
@@ -241,8 +242,8 @@ The ``PurchaseFlow`` consists of a ``PurchaseSinkFlowlet``.
 Build & Run
 -----------
 
-The ``PurchaseApp`` application can be built and packaged using standard Apache Maven commands::
-(Run all commands from the source base directory)
+The ``PurchaseApp`` application can be built and packaged using standard Apache Maven commands.
+Run the following commands from the project directory::
 
   mvn clean package
 
@@ -251,13 +252,17 @@ If this is not the case, please add it::
 
   export PATH=$PATH:<CDAP home>/bin
 
+If you haven't started already CDAP standalone, start it with the following commands::
+
+  cdap.sh start
+
 We can then deploy the application to a running standalone CDAP installation::
 
   cdap-cli.sh deploy app target/cdap-bi-guide-1.0.0.jar
   cdap-cli.sh start flow PurchaseApp.PurchaseFlow
 
 Next, we will send some sample purchase events into the stream for processing. The purchase event consists of
-``customer name``, ``quantity purchased`` and ``product purchased``::
+a ``customer name``, a ``quantity purchased`` and a ``product purchased``::
 
   cdap-cli.sh send stream purchases "Tom,    5,       pear"
   cdap-cli.sh send stream purchases "Alice, 12,      apple"
@@ -267,40 +272,39 @@ Next, we will send some sample purchase events into the stream for processing. T
   cdap-cli.sh send stream purchases "Bob,   10,      apple"
 
 
-Now that purchase events have been sent to CDAP, they can be explored with a BI tool such as
+Now that purchase events have been ingested by CDAP, they can be explored with a BI tool such as
 *Pentaho Data Integration*.
 
-#. Download *Pentaho Data Integration* and unzip it, if not done already.
+#. Download *Pentaho Data Integration* and unzip it.
 #. Before opening the *Pentaho Data Integration* application, copy the
    ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
-   file to the ``<data-integration-dir>/lib`` directory*.
+   file to the ``<data-integration-dir>/lib`` directory.
 #. Run *Pentaho Data Integration* by invoking ``<data-integration-dir>/spoon.sh`` from a terminal. 
 #. Open ``<src-dir>/resources/total_spend_per_user.ktr`` using "File" -> "Open URL"
 
    This is a Kettle Transformation file exported from Pentaho Data Integration. This file contains a
    transformation that calculates total spend of a customer based on purchase events above.
-   The transformation has several components or ``steps``:
+   The transformation has several components or steps:
 
-  * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the
-    stored purchase events from CDAP.
-  * The ``Product Catalog CSV`` step is another source of data, which pulls in a table from a locally defined csv file.
-    This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
-  * The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the
-    purchase event.
-  * We use the ``Product Cost Calculator`` step to multiple purchase.quantity by price to get the total cost for the
-    purchase.
-  * The ``Sort on Customer`` simply sorts all of the rows by customer so that the next step can aggregate on price.
-  * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This
-    results in a table that is a mapping from customer name to a total amount spent by that customer.
-
+ * ``CDAP Purchases Dataset`` is a step which uses ``PurchasesDataset`` as an input source. It pulls all of the
+   stored purchase events from CDAP.
+ * The ``Product Catalog CSV`` step is another source of data, which pulls in a table from a locally defined csv file.
+   This table contains a mapping product name to product price, so that we can put a pricing on the purchase events.
+ * The ``Join Rows`` step joins the two data sources on ``product`` column, hence adding price information to the
+   purchase event.
+ * We use the ``Product Cost Calculator`` step to multiply ``purchase.quantity`` by ``price`` to get the total cost
+   for the purchase.
+ * The ``Sort on Customer`` sorts all of the rows by customer so that the next step can aggregate on price.
+ * The ``Aggregate by Customer`` groups the rows by customer and aggregates on the total cost per purchase. This
+   results in a table that is a mapping from customer name to a total amount spent by that customer.
 
 #. Double click on the CSV file input step, and change the filename to point to ``<src-dir>/resources/prices.csv``
 
    .. image:: docs/images/edit-csv-input-file.png
 
 #. To run this transformation , click "Action" -> "Run" -> "Launch".
-#. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total spend
-   by customer.
+#. Once the transformation has completed executing, click on the *Group by Customer* step to preview the total amount
+spent by customer.
 
    .. image:: docs/images/preview-data.png
 
@@ -318,14 +322,14 @@ Related Topics
 Extend This Example
 -------------------
 
-You can ask more questions like:
+Now that you know how to integrate CDAP Datasets with BI Tools, you can ask more questions like:
 
-* How much revenue does a particular product earn in a day?
+* How much revenue does a particular product generate in a day?
 * What are the three most popular products?
 
-If you add zip code to the purchase event, then you can ask location-based questions such as:
+If you add a ZIP code to the purchase event, then you can ask location-based questions such as:
 
-* Which are the popular products in any location?
+* What are the popular products in any location?
 * Which locations have the highest revenue?
 
 Share & Discuss!
