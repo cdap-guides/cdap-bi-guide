@@ -267,7 +267,7 @@ a ``customer name``, a ``quantity purchased`` and a ``product purchased``::
 Now that purchase events have been ingested by CDAP, they can be explored with a BI tool such as
 *Pentaho Data Integration*.
 
-#. Download *Pentaho Data Integration* and unzip it.
+#. Download `Pentaho Data Integration <http://community.pentaho.com/>`_ and unzip it.
 #. Before opening the *Pentaho Data Integration* application, copy the
    ``<cdap-standalone-dir>/lib/co.cask.cdap.cdap-explore-jdbc-<version>.jar``
    file to the ``<data-integration-dir>/lib`` directory.
