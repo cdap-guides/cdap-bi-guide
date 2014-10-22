@@ -57,6 +57,7 @@ Implementation
 
 The first step is to get our application structure set up.  We will use a standard Maven project structure for all
 of the source code files::
+
   ./pom.xml
   ./src/main/java/co/cask/cdap/guides/purchase/Purchase.java
   ./src/main/java/co/cask/cdap/guides/purchase/PurchaseApp.java
