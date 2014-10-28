@@ -1,9 +1,9 @@
 Analyzing CDAP Data from BI Tools
 =================================
 
-Cask Data Application Platform (CDAP)
+Cask Data Application Platform (CDAP) provides an abstraction—
 [Datasets](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/datasets/index.html)
-provides an abstraction to store data. In this guide you will learn how
+—to store data. In this guide, you will learn how
 to integrate and analyze Datasets with BI (Business Intelligence) Tools.
 
 What You Will Build
@@ -351,8 +351,8 @@ location-based questions such as:
 -   What are the popular products in any location?
 -   Which locations have the highest revenue?
 
-Share & Discuss!
-----------------
+Share and Discuss!
+------------------
 
 Have a question? Discuss at [CDAP User Mailing List](https://groups.google.com/forum/#!forum/cdap-user)
 
