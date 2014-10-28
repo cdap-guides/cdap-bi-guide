@@ -48,7 +48,8 @@ Build and Run Application\_ section.
 In this example, we will learn how to explore purchase events using the *Pentaho* BI
 Tool. We can ask questions such as *"What is the total spend of a customer for a given day?"*
 
-![(AppDesign)](docs/images/app-design.png)
+![](docs/images/app-design.png)
+
 
 A purchase event consists of:
 
@@ -315,14 +316,14 @@ explored with a BI tool such as *Pentaho Data Integration*.
 5.  Double click on the CSV file input step, and change the filename to
     point to `<cdap-bi-guide-dir>/resources/prices.csv`
 
-    ![image](docs/images/edit-csv-input-file.png)
+    ![](docs/images/edit-csv-input-file.png)
 
 6.  To run this transformation, click "Action" -\> "Run" -\> "Launch".
 7.  Once the transformation has completed execution, click on the
     `Aggregate by Customer` step, and then click on the `Preview Data`
     tab at the bottom to view the total amount spent by each customer.
 
-    ![image](docs/images/preview-data.png)
+    ![](docs/images/preview-data.png)
 
 Congratulations! You have now learned how to analyze CDAP Datasets from
 a BI tool. Please continue to experiment and extend this sample application.
