@@ -80,7 +80,7 @@ extends
 [AbstractApplication](http://docs.cdap.io/cdap/current/en/reference/javadocs/co/cask/cdap/api/app/AbstractApplication.html),
 and overrides the `configure()` method to define all of the application components:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseApp extends AbstractApplication {
 
   public static final String APP_NAME = "PurchaseApp";
@@ -107,7 +107,7 @@ data. `PurchaseApp` uses an
 Dataset to store the purchase events. The purchase events are
 represented as a Java class, `Purchase`:
 
-``` {.sourceCode .java}
+```java
 public class Purchase {
   private final String customer;
   private final String product;
@@ -147,7 +147,7 @@ public class Purchase {
 PurchaseApp adds a `PurchaseFlow` to process data from the Stream and
 store it into the Dataset:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseFlow implements Flow {
 
   @Override
@@ -166,7 +166,7 @@ public class PurchaseFlow implements Flow {
 
 The `PurchaseFlow` contains a `PurchaseSinkFlowlet` that writes to the Dataset:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
   private static final Logger LOG = LoggerFactory.getLogger(PurchaseSinkFlowlet.class);
@@ -199,7 +199,7 @@ public class PurchaseSinkFlowlet extends AbstractFlowlet {
 `PurchaseStore` is a custom dataset that implements the `RecordScannable` interface for
 integration with Hive:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseStore extends AbstractDataset implements RecordScannable<Purchase> {
 
   private final ObjectStore<Purchase> store;
