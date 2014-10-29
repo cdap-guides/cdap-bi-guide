@@ -17,11 +17,10 @@ persists the results in a Dataset, and then analyzes them using a BI tool. You
 will:
 
 -   Build a CDAP Application that consumes purchase events from a Stream
-    and stores them in a Dataset;
+    and stores them in a [Dataset;](http://docs.cask.co/cdap/current/en/dev-guide.html#datasets)
 -   Build a
     [Flowlet](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/flows-flowlets/flowlets.html)
-    that processes purchase events in realtime, writing the events into a
-    Dataset; and
+    that processes purchase events in realtime, writing the events into a Dataset; and
 -   Finally, access this Dataset from a BI tool to run queries by
     joining purchase events in the Dataset with a product catalog—a
     local data source in the BI tool.
@@ -41,7 +40,7 @@ The following sections will guide you through building an application from scrat
 are interested in deploying and running the application right away, you can clone its
 source code and binaries from this GitHub repository. In that case, feel free to skip the
 next two sections and jump right to the
-Build and Run Application\_ section.
+[Build and Run Application][] section.
 
 ### Application Design
 
@@ -287,28 +286,28 @@ explored with a BI tool such as *Pentaho Data Integration*.
 3.  Run *Pentaho Data Integration* by invoking
     `<data-integration-dir>/spoon.sh` from a terminal.
 4.  Open `<cdap-bi-guide-dir>/resources/total_spend_per_user.ktr` using
-    "File" -\> "Open URL"
+    *File* -\> *Open URL*
 
     This is a *Kettle Transformation* file exported from Pentaho Data
     Integration. This file contains a transformation that calculates the
     total spend of a customer based on the previous purchase events. The
     transformation has several components or steps:
 
-    -   `CDAP Purchases Dataset` is a step which uses the `PurchasesDataset`
+    -   *CDAP Purchases Dataset* is a step which uses the `PurchasesDataset`
         as an input source. It pulls all of the stored purchase events
         from CDAP.
-    -   The `Product Catalog CSV` step is another source of data, which
+    -   The *Product Catalog CSV* step is another source of data, which
         pulls in a table from a locally defined csv file. This table
         contains a mapping of product name to product price, so that we can
         put a pricing on the purchase events.
-    -   The `Join Rows` step joins the two data sources on the `product`
+    -   The *Join Rows* step joins the two data sources on the `product`
         column, hence adding price information to the purchase event.
-    -   We use the `Product Cost Calculator` step to multiply
+    -   We use the *Product Cost Calculator* step to multiply
         `purchase.quantity` by `price` to get the total cost for the
         purchase.
-    -   The `Sort on Customer` sorts all of the rows by customer so that
+    -   The *Sort on Customer* sorts all of the rows by customer so that
         the next step can aggregate on price.
-    -   The `Aggregate by Customer` groups the rows by customer and
+    -   The *Aggregate by Customer* groups the rows by customer and
         aggregates on the total cost per purchase. This results in a
         table that is a mapping from customer name to a total amount
         spent by that customer.
@@ -318,9 +317,9 @@ explored with a BI tool such as *Pentaho Data Integration*.
 
     ![](docs/images/edit-csv-input-file.png)
 
-6.  To run this transformation, click "Action" -\> "Run" -\> "Launch".
+6.  To run this transformation, click *Action* -\> *Run* -\> *Launch*.
 7.  Once the transformation has completed execution, click on the
-    `Aggregate by Customer` step, and then click on the `Preview Data`
+    *Aggregate by Customer* step, and then click on the *Preview Data*
     tab at the bottom to view the total amount spent by each customer.
 
     ![](docs/images/preview-data.png)
