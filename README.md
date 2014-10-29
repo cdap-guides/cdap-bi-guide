@@ -9,29 +9,29 @@ to integrate and analyze Datasets with BI (Business Intelligence) Tools.
 What You Will Build
 -------------------
 
-This guide will take you through building a CDAP
-[Application](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/applications.html)
+This guide will take you through building a
+[CDAP application](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/applications.html)
 that processes purchase events from a
-[Stream](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/streams.html),
+[Stream,](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/streams.html)
 persists the results in a Dataset, and then analyzes them using a BI tool. You
 will:
 
--   Build a CDAP Application that consumes purchase events from a Stream
-    and stores them in a [Dataset;](http://docs.cask.co/cdap/current/en/dev-guide.html#datasets)
--   Build a
-    [Flowlet](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/flows-flowlets/flowlets.html)
-    that processes purchase events in realtime, writing the events into a Dataset; and
--   Finally, access this Dataset from a BI tool to run queries by
-    joining purchase events in the Dataset with a product catalog—a
-    local data source in the BI tool.
+- Build a CDAP Application that consumes purchase events from a Stream and stores them in a 
+  [Dataset;](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/datasets/index.html)
+- Build a
+  [Flowlet](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/flows-flowlets/flowlets.html)
+  that processes purchase events in realtime, writing the events into a Dataset; and
+- Finally, access this Dataset from a BI tool to run queries by
+  joining purchase events in the Dataset with a product catalog—a
+  local data source in the BI tool.
 
 What You Will Need
 ------------------
 
--   [JDK 6 or JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
--   [Apache Maven 3.0+](http://maven.apache.org/)
--   [CDAP SDK](http://docs.cdap.io/cdap/current/en/developer-guide/getting-started/standalone/index.html)
--   [Pentaho Data Integration](http://community.pentaho.com/)
+- [JDK 6 or JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- [Apache Maven 3.0+](http://maven.apache.org/)
+- [CDAP SDK](http://docs.cdap.io/cdap/current/en/developer-guide/getting-started/standalone/index.html)
+- [Pentaho Data Integration](http://community.pentaho.com/)
 
 Let’s Build It!
 ---------------
@@ -79,7 +79,7 @@ extends
 [AbstractApplication](http://docs.cdap.io/cdap/current/en/reference/javadocs/co/cask/cdap/api/app/AbstractApplication.html),
 and overrides the `configure()` method to define all of the application components:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseApp extends AbstractApplication {
 
   public static final String APP_NAME = "PurchaseApp";
@@ -106,7 +106,7 @@ data. `PurchaseApp` uses an
 Dataset to store the purchase events. The purchase events are
 represented as a Java class, `Purchase`:
 
-``` {.sourceCode .java}
+```java
 public class Purchase {
   private final String customer;
   private final String product;
@@ -146,7 +146,7 @@ public class Purchase {
 PurchaseApp adds a `PurchaseFlow` to process data from the Stream and
 store it into the Dataset:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseFlow implements Flow {
 
   @Override
@@ -165,7 +165,7 @@ public class PurchaseFlow implements Flow {
 
 The `PurchaseFlow` contains a `PurchaseSinkFlowlet` that writes to the Dataset:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
   private static final Logger LOG = LoggerFactory.getLogger(PurchaseSinkFlowlet.class);
@@ -198,7 +198,7 @@ public class PurchaseSinkFlowlet extends AbstractFlowlet {
 `PurchaseStore` is a custom dataset that implements the `RecordScannable` interface for
 integration with Hive:
 
-``` {.sourceCode .java}
+```java
 public class PurchaseStore extends AbstractDataset implements RecordScannable<Purchase> {
 
   private final ObjectStore<Purchase> store;
@@ -245,8 +245,8 @@ public class PurchaseStore extends AbstractDataset implements RecordScannable<Pu
 Build and Run Application
 -------------------------
 
-The `PurchaseApp` application can be built and packaged using Apache
-Maven commands. Run the following commands from the project directory:
+The `PurchaseApp` application can be built and packaged using the Apache Maven command
+from the project directory:
 
     mvn clean package
 
@@ -353,5 +353,21 @@ location-based questions such as:
 Share and Discuss!
 ------------------
 
-Have a question? Discuss at [CDAP User Mailing List](https://groups.google.com/forum/#!forum/cdap-user)
+Have a question? Discuss at the [CDAP User Mailing List.](https://groups.google.com/forum/#!forum/cdap-user)
 
+License
+-------
+
+Copyright © 2014 Cask Data, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
