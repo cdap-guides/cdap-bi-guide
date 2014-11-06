@@ -19,6 +19,7 @@ import co.cask.cdap.api.annotation.ProcessInput;
 import co.cask.cdap.api.annotation.UseDataSet;
 import co.cask.cdap.api.flow.flowlet.AbstractFlowlet;
 import co.cask.cdap.api.flow.flowlet.StreamEvent;
+import com.google.common.base.Charsets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,7 +36,7 @@ public class PurchaseSinkFlowlet extends AbstractFlowlet {
 
   @ProcessInput
   public void process(StreamEvent event) {
-    String body = new String(event.getBody().array());
+    String body = Charsets.UTF_8.decode(event.getBody()).toString();
     // <customer>,<quantity>,<productId>
     String[] tokens =  body.split(",");
     for (int i = 0; i < tokens.length; i++) {
