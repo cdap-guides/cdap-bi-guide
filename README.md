@@ -2,7 +2,7 @@ Analyzing CDAP Data from BI Tools
 =================================
 
 Cask Data Application Platform (CDAP) provides an abstraction—
-[Datasets](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/datasets/index.html)
+[Datasets](http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/datasets/index.html)
 —to store data. In this guide, you will learn how
 to integrate and analyze Datasets with BI (Business Intelligence) Tools.
 
@@ -10,16 +10,16 @@ What You Will Build
 -------------------
 
 This guide will take you through building a
-[CDAP application](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/applications.html)
+[CDAP application](http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/applications.html)
 that processes purchase events from a
-[Stream,](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/streams.html)
+[Stream,](http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/streams.html)
 persists the results in a Dataset, and then analyzes them using a BI tool. You
 will:
 
 - Build a CDAP Application that consumes purchase events from a Stream and stores them in a 
-  [Dataset;](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/datasets/index.html)
+  [Dataset;](http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/datasets/index.html)
 - Build a
-  [Flowlet](http://docs.cdap.io/cdap/current/en/developer-guide/building-blocks/flows-flowlets/flowlets.html)
+  [Flowlet](http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/flows-flowlets/flowlets.html)
   that processes purchase events in realtime, writing the events into a Dataset; and
 - Finally, access this Dataset from a BI tool to run queries by
   joining purchase events in the Dataset with a product catalog—a
@@ -30,7 +30,7 @@ What You Will Need
 
 - [JDK 6 or JDK 7](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 - [Apache Maven 3.0+](http://maven.apache.org/)
-- [CDAP SDK](http://docs.cdap.io/cdap/current/en/developer-guide/getting-started/standalone/index.html)
+- [CDAP SDK](http://docs.cdap.io/cdap/current/en/developers-manual/getting-started/standalone/index.html)
 - [Pentaho Data Integration](http://community.pentaho.com/)
 
 Let’s Build It!
@@ -59,8 +59,8 @@ A purchase event consists of:
 Purchase events are injected into the `purchases` Stream. The `sink` Flowlet
 reads events from the Stream and writes them into the `PurchasesDataset`. The
 `PurchasesDataset` has Hive integration enabled and can be queried, 
-like any regular Database table, from a BI tool by using the [CDAP JDBC
-Driver.](http://docs.cdap.io/cdap/current/en/developer-guide/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver)
+like any regular Database table, from a BI tool by using the
+[CDAP JDBC Driver.](http://docs.cdap.io/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver)
 
 ### Implementation
 
@@ -76,7 +76,7 @@ standard Maven project structure for all of the source code files:
 
 The application is identified by the `PurchaseApp` class. This class
 extends
-[AbstractApplication](http://docs.cdap.io/cdap/current/en/reference/javadocs/co/cask/cdap/api/app/AbstractApplication.html),
+[AbstractApplication](http://docs.cdap.io/cdap/current/en/reference-manual/javadocs/co/cask/cdap/api/app/AbstractApplication.html),
 and overrides the `configure()` method to define all of the application components:
 
 ```java
@@ -102,7 +102,7 @@ the application name, our `PurchaseApp` adds a new Stream, called `purchases`.
 We also need a place to store the purchase event records that we
 receive; `PurchaseApp` next creates a Dataset to store the processed
 data. `PurchaseApp` uses an
-[ObjectStore](http://docs.cdap.io/cdap/current/en/reference/javadocs/co/cask/cdap/api/dataset/lib/ObjectStore.html)
+[ObjectStore](http://docs.cdap.io/cdap/current/en/reference-manual/javadocs/co/cask/cdap/api/dataset/lib/ObjectStore.html)
 Dataset to store the purchase events. The purchase events are
 represented as a Java class, `Purchase`:
 
@@ -331,7 +331,7 @@ Related Topics
 --------------
 
 -   [Connecting to CDAP Datasets using CDAP JDBC
-    driver](http://docs.cask.co/cdap/current/en/developer-guide/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver)
+    driver](http://docs.cask.co/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver)
 -   [Pentaho Data Integration (Kettle)
     Tutorial](http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+%28Kettle%29+Tutorial)
 
