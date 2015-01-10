@@ -26,22 +26,29 @@
   <version>1.0.0</version>
   <packaging>jar</packaging>
 
+  <properties>
+    <app.main.class>co.cask.cdap.guides.purchase.PurchaseApp</app.main.class>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <cdap.version>2.7.0-SNAPSHOT</cdap.version>
+    <junit.version>4.11</junit.version>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>co.cask.cdap</groupId>
       <artifactId>cdap-api</artifactId>
-      <version>2.7.0-SNAPSHOT</version>
+      <version>${cdap.version}</version>
     </dependency>
     <dependency>
       <groupId>co.cask.cdap</groupId>
       <artifactId>cdap-unit-test</artifactId>
-      <version>2.7.0-SNAPSHOT</version>
+      <version>${cdap.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -63,7 +70,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>co.cask.cdap.guides.purchase.PurchaseApp</mainClass>
+              <mainClass>${app.main.class}</mainClass>
             </manifest>
           </archive>
           <instructions>
