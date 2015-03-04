@@ -13,7 +13,7 @@ What You Will Build
 This guide will take you through building a
 `CDAP application <http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/applications.html>`__
 that processes purchase events from a
-`Stream <http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/streams.html`__,
+`Stream <http://docs.cdap.io/cdap/current/en/developers-manual/building-blocks/streams.html>`__,
 persists the results in a Dataset, and then analyzes them using a BI tool. You
 will:
 
