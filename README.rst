@@ -54,15 +54,15 @@ Tool. We can ask questions such as *"What is the total spend of a customer for a
 
 A purchase event consists of:
 
--   Customer
--   Quantity purchased
--   Product
+- Customer
+- Quantity purchased
+- Product
 
 Purchase events are injected into the ``purchases`` Stream. The ``sink`` Flowlet
 reads events from the Stream and writes them into the ``PurchasesDataset``. The
 ``PurchasesDataset`` has Hive integration enabled and can be queried, 
 like any regular Database table, from a BI tool by using the
-`CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>__.
+`CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`__.
 
 Implementation
 --------------
@@ -202,6 +202,7 @@ The ``PurchaseFlow`` contains a ``PurchaseSinkFlowlet`` that writes to the Datas
 integration with Hive:
 
 .. code:: java
+
   public class PurchaseStore extends AbstractDataset implements RecordScannable<Purchase> {
 
     private final ObjectStore<Purchase> store;
