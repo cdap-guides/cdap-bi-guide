@@ -17,12 +17,12 @@ package co.cask.cdap.examples.purchase;
 
 import co.cask.cdap.api.data.batch.RecordScanner;
 import co.cask.cdap.api.data.batch.Split;
+import co.cask.cdap.api.metrics.RuntimeMetrics;
 import co.cask.cdap.guides.purchase.Purchase;
 import co.cask.cdap.guides.purchase.PurchaseApp;
 import co.cask.cdap.guides.purchase.PurchaseStore;
 import co.cask.cdap.test.ApplicationManager;
 import co.cask.cdap.test.DataSetManager;
-import co.cask.cdap.test.RuntimeMetrics;
 import co.cask.cdap.test.RuntimeStats;
 import co.cask.cdap.test.StreamWriter;
 import co.cask.cdap.test.TestBase;
@@ -69,7 +69,7 @@ public class PurchaseAppTest extends TestBase {
 
       // Ensure that the purchase events sent to the stream match the purchases persisted to the Dataset.
       ArrayList<Purchase> dsPurchases = new ArrayList<Purchase>();
-      DataSetManager<PurchaseStore> dsManager = appManager.getDataSet("PurchasesDataset");
+      DataSetManager<PurchaseStore> dsManager = getDataset("PurchasesDataset");
       PurchaseStore purchaseStore = dsManager.get();
       List<Split> splits = purchaseStore.getSplits();
       for (Split split : splits) {
