@@ -69,12 +69,12 @@ Implementation
 The first step is to get our application structure set up. We will use a
 standard Maven project structure for all of the source code files::
 
-    ./pom.xml
-    ./src/main/java/co/cask/cdap/guides/purchase/Purchase.java
-    ./src/main/java/co/cask/cdap/guides/purchase/PurchaseApp.java
-    ./src/main/java/co/cask/cdap/guides/purchase/PurchaseFlow.java
-    ./src/main/java/co/cask/cdap/guides/purchase/PurchaseSinkFlowlet.java
-    ./src/main/java/co/cask/cdap/guides/purchase/PurchaseStore.java
+  ./pom.xml
+  ./src/main/java/co/cask/cdap/guides/purchase/Purchase.java
+  ./src/main/java/co/cask/cdap/guides/purchase/PurchaseApp.java
+  ./src/main/java/co/cask/cdap/guides/purchase/PurchaseFlow.java
+  ./src/main/java/co/cask/cdap/guides/purchase/PurchaseSinkFlowlet.java
+  ./src/main/java/co/cask/cdap/guides/purchase/PurchaseStore.java
 
 The application is identified by the ``PurchaseApp`` class. This class
 extends `AbstractApplication
@@ -252,32 +252,32 @@ Build and Run Application
 The ``PurchaseApp`` application can be built and packaged using the Apache Maven command
 from the project directory::
 
-    mvn clean package
+  $ mvn clean package
 
 Note that the remaining commands assume that the ``cdap-cli.sh`` script is
 available on your PATH. If this is not the case, please add it::
 
-    export PATH=$PATH:<CDAP home>/bin
+  $ export PATH=$PATH:<CDAP home>/bin
 
 If you haven't already started a standalone CDAP installation, start it with the command::
 
-    cdap.sh start
+  $ cdap.sh start
 
 We can then deploy the application to a running standalone CDAP installation::
 
-    cdap-cli.sh deploy app target/cdap-bi-guide-1.0.0.jar
-    cdap-cli.sh start flow PurchaseApp.PurchaseFlow
+  $ cdap-cli.sh deploy app target/cdap-bi-guide-<version>.jar
+  $ cdap-cli.sh start flow PurchaseApp.PurchaseFlow
 
 Next, we will send some sample purchase events into the stream for
 processing. The purchase event consists of a ``customer name``, a
 ``quantity purchased`` and a ``product purchased``::
 
-    cdap-cli.sh send stream purchases "Tom,    5,       pear"
-    cdap-cli.sh send stream purchases "Alice, 12,      apple"
-    cdap-cli.sh send stream purchases "Alice,  6,     banana"
-    cdap-cli.sh send stream purchases "Bob,    2,     orange"
-    cdap-cli.sh send stream purchases "Bob,    1, watermelon"
-    cdap-cli.sh send stream purchases "Bob,   10,      apple"
+  $ cdap-cli.sh send stream purchases \"Tom,    5,       pear\"
+  $ cdap-cli.sh send stream purchases \"Alice, 12,      apple\"
+  $ cdap-cli.sh send stream purchases \"Alice,  6,     banana\"
+  $ cdap-cli.sh send stream purchases \"Bob,    2,     orange\"
+  $ cdap-cli.sh send stream purchases \"Bob,    1, watermelon\"
+  $ cdap-cli.sh send stream purchases \"Bob,   10,      apple\"
 
 Now that purchase events have been ingested by CDAP, they can be
 explored with a BI tool such as *Pentaho Data Integration*.
