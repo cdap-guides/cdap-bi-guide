@@ -29,8 +29,8 @@ will:
 What You Will Need
 ==================
 
-- `JDK 6 or JDK 7 <http://www.oracle.com/technetwork/java/javase/downloads/index.html>`__
-- `Apache Maven 3.0+ <http://maven.apache.org/>`__
+- `JDK 7 <http://www.oracle.com/technetwork/java/javase/downloads/index.html>`__
+- `Apache Maven 3.1+ <http://maven.apache.org/>`__
 - `CDAP SDK <http://docs.cdap.io/cdap/current/en/developers-manual/getting-started/standalone/index.html>`__
 - `Pentaho Data Integration <http://community.pentaho.com/>`__
 
@@ -340,7 +340,7 @@ Related Topics
 ==============
 
 -   `Connecting to CDAP Datasets using CDAP JDBC driver 
-    <http://docs.cask.co/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`__
+    <http://docs.cask.co/cdap/current/en/integrations/jdbc>`__
 -   `Pentaho Data Integration (Kettle) Tutorial
     <http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+%28Kettle%29+Tutorial>`__
 
