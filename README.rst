@@ -340,7 +340,7 @@ Related Topics
 ==============
 
 -   `Connecting to CDAP Datasets using CDAP JDBC driver 
-    <http://docs.cask.co/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`__
+    <http://docs.cask.co/cdap/current/en/integrations/jdbc>`__
 -   `Pentaho Data Integration (Kettle) Tutorial
     <http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+%28Kettle%29+Tutorial>`__
 
