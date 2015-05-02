@@ -153,7 +153,7 @@
       <give_back_row>N</give_back_row>
       <group>
         <field>
-          <name>cdap_user_purchasesdataset.customer</name>
+          <name>dataset_purchasesdataset.customer</name>
         </field>
       </group>
       <fields>
@@ -184,7 +184,7 @@
            <schema_name/>
            </partitioning>
     <connection>cdap</connection>
-    <sql>SELECT &#x2a;&#xa;FROM cdap_user_purchasesdataset&#xa;</sql>
+    <sql>SELECT &#x2a;&#xa;FROM dataset_purchasesdataset&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -216,7 +216,7 @@
     <compare>
 <condition>
  <negated>N</negated>
- <leftvalue>cdap_user_purchasesdataset.product</leftvalue>
+ <leftvalue>dataset_purchasesdataset.product</leftvalue>
  <function>&#x3d;</function>
  <rightvalue>product</rightvalue>
  </condition>
@@ -298,7 +298,7 @@
            </partitioning>
        <calculation><field_name>total_spend</field_name>
 <calc_type>MULTIPLY</calc_type>
-<field_a>cdap_user_purchasesdataset.quantity</field_a>
+<field_a>dataset_purchasesdataset.quantity</field_a>
 <field_b>price</field_b>
 <field_c/>
 <value_type>None</value_type>
@@ -338,7 +338,7 @@
       <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>cdap_user_purchasesdataset.customer</name>
+        <name>dataset_purchasesdataset.customer</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
