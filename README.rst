@@ -62,7 +62,7 @@ Purchase events are injected into the ``purchases`` Stream. The ``sink`` Flowlet
 reads events from the Stream and writes them into the ``PurchasesDataset``. The
 ``PurchasesDataset`` has Hive integration enabled and can be queried, 
 like any regular Database table, from a BI tool by using the
-`CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/developers-manual/advanced/data-exploration.html#connecting-to-cdap-datasets-using-cdap-jdbc-driver>`__.
+`CDAP JDBC Driver <http://docs.cdap.io/cdap/current/en/integrations/jdbc.html>`__.
 
 Implementation
 --------------
