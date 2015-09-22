@@ -265,7 +265,8 @@ If you haven't already started a standalone CDAP installation, start it with the
 
 We can then deploy the application to a running standalone CDAP installation::
 
-  $ cdap-cli.sh deploy app target/cdap-bi-guide-<version>.jar
+  $ cdap-cli.sh load artifact target/cdap-bi-guide-<version>.jar
+  $ cdap-cli.sh create app PurchaseApp cdap-bi-guide <version> user
   $ cdap-cli.sh start flow PurchaseApp.PurchaseFlow
 
 Next, we will send some sample purchase events into the stream for
