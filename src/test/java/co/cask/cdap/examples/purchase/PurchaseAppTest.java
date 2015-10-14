@@ -23,8 +23,8 @@ import co.cask.cdap.guides.purchase.PurchaseApp;
 import co.cask.cdap.guides.purchase.PurchaseStore;
 import co.cask.cdap.test.ApplicationManager;
 import co.cask.cdap.test.DataSetManager;
-import co.cask.cdap.test.RuntimeStats;
-import co.cask.cdap.test.StreamWriter;
+import co.cask.cdap.test.FlowManager;
+import co.cask.cdap.test.StreamManager;
 import co.cask.cdap.test.TestBase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -45,30 +45,30 @@ public class PurchaseAppTest extends TestBase {
     try {
 
       // Start PurchaseFlow
-      appManager.startFlow("PurchaseFlow");
+      FlowManager flowManager = appManager.getFlowManager("PurchaseFlow").start();
 
       // Send stream events to the "purchases" Stream
-      ArrayList<Purchase> purchaseEvents = new ArrayList<Purchase>();
+      ArrayList<Purchase> purchaseEvents = new ArrayList<>();
       purchaseEvents.add(new Purchase("bob", "apple", 3, 0));
       purchaseEvents.add(new Purchase("joe", "pear", 1, 0));
       purchaseEvents.add(new Purchase("joe", "banana", 10, 0));
       purchaseEvents.add(new Purchase("kat", "watermelon", 32, 0));
       purchaseEvents.add(new Purchase("kat", "orange", 2, 0));
 
-      StreamWriter streamWriter = appManager.getStreamWriter("purchases");
+      StreamManager streamManager = getStreamManager("purchases");
       for (Purchase purchase: purchaseEvents) {
         String event = String.format("%s,%d,%s", purchase.getCustomer(), purchase.getQuantity(),
                                      purchase.getProduct());
-        streamWriter.send(event);
+        streamManager.send(event);
       }
 
       // Wait for the Flowlet to finish processing the stream events, with a timeout of at most 15 seconds
-      RuntimeMetrics metrics = RuntimeStats.getFlowletMetrics(PurchaseApp.APP_NAME, "PurchaseFlow", "sink");
+      RuntimeMetrics metrics = flowManager.getFlowletMetrics("sink");
       metrics.waitForProcessed(purchaseEvents.size(), 15, TimeUnit.SECONDS);
 
 
       // Ensure that the purchase events sent to the stream match the purchases persisted to the Dataset.
-      ArrayList<Purchase> dsPurchases = new ArrayList<Purchase>();
+      ArrayList<Purchase> dsPurchases = new ArrayList<>();
       DataSetManager<PurchaseStore> dsManager = getDataset("PurchasesDataset");
       PurchaseStore purchaseStore = dsManager.get();
       List<Split> splits = purchaseStore.getSplits();
