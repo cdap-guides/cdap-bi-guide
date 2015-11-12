@@ -150,18 +150,14 @@ store it into the Dataset:
 
 .. code:: java
 
-  public class PurchaseFlow implements Flow {
+  public class PurchaseFlow extends AbstractFlow {
 
     @Override
-    public FlowSpecification configure() {
-      return FlowSpecification.Builder.with()
-        .setName("PurchaseFlow")
-        .setDescription("Reads purchase events from a stream and stores the purchases in a Dataset")
-        .withFlowlets()
-          .add("sink", new PurchaseSinkFlowlet())
-        .connect()
-          .fromStream("purchases").to("sink")
-        .build();
+    public void configure() {
+      setName("PurchaseFlow");
+      setDescription("Reads purchase events from a stream and stores the purchases in a Dataset");
+      addFlowlet("sink", new PurchaseSinkFlowlet());
+      connectStream("purchases", "sink");
     }
   }
 

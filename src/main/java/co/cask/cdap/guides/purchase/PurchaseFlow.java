@@ -15,25 +15,20 @@
  */
 package co.cask.cdap.guides.purchase;
 
-import co.cask.cdap.api.flow.Flow;
-import co.cask.cdap.api.flow.FlowSpecification;
+import co.cask.cdap.api.flow.AbstractFlow;
 
 /**
  * This is a simple Flow that consumes purchase events from a Stream and stores Purchase objects in a Dataset.
  * It has only one Flowlet, which consumes events from a Stream, converts them into Purchase objects, and
  * stores them in a Dataset.
  */
-public class PurchaseFlow implements Flow {
+public class PurchaseFlow extends AbstractFlow {
 
   @Override
-  public FlowSpecification configure() {
-    return FlowSpecification.Builder.with()
-      .setName("PurchaseFlow")
-      .setDescription("Reads purchase events from a stream and stores the purchases in a Dataset")
-      .withFlowlets()
-        .add("sink", new PurchaseSinkFlowlet())
-      .connect()
-        .fromStream("purchases").to("sink")
-      .build();
+  public void configure() {
+    setName("PurchaseFlow");
+    setDescription("Reads purchase events from a stream and stores the purchases in a Dataset");
+    addFlowlet("sink", new PurchaseSinkFlowlet());
+    connectStream("purchases", "sink");
   }
 }
