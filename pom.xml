@@ -31,6 +31,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <cdap.version>3.5.0-SNAPSHOT</cdap.version>
     <junit.version>4.11</junit.version>
+    <guava.version>13.0.1</guava.version>
   </properties>
 
   <dependencies>
@@ -50,6 +51,11 @@
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
     </dependency>
   </dependencies>
 
