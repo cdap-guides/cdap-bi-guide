@@ -250,31 +250,31 @@ from the project directory::
 
   $ mvn clean package
 
-Note that the remaining commands assume that the ``cdap-cli.sh`` script is
+Note that the remaining commands assume that the ``cdap`` script is
 available on your PATH. If this is not the case, please add it::
 
   $ export PATH=$PATH:<CDAP home>/bin
 
 If you haven't already started a standalone CDAP installation, start it with the command::
 
-  $ cdap.sh start
+  $ cdap sdk start
 
 We can then deploy the application to a running standalone CDAP installation::
 
-  $ cdap-cli.sh load artifact target/cdap-bi-guide-<version>.jar
-  $ cdap-cli.sh create app PurchaseApp cdap-bi-guide <version> user
-  $ cdap-cli.sh start flow PurchaseApp.PurchaseFlow
+  $ cdap cli load artifact target/cdap-bi-guide-<version>.jar
+  $ cdap cli create app PurchaseApp cdap-bi-guide <version> user
+  $ cdap cli start flow PurchaseApp.PurchaseFlow
 
 Next, we will send some sample purchase events into the stream for
 processing. The purchase event consists of a ``customer name``, a
 ``quantity purchased`` and a ``product purchased``::
 
-  $ cdap-cli.sh send stream purchases \"Tom,    5,       pear\"
-  $ cdap-cli.sh send stream purchases \"Alice, 12,      apple\"
-  $ cdap-cli.sh send stream purchases \"Alice,  6,     banana\"
-  $ cdap-cli.sh send stream purchases \"Bob,    2,     orange\"
-  $ cdap-cli.sh send stream purchases \"Bob,    1, watermelon\"
-  $ cdap-cli.sh send stream purchases \"Bob,   10,      apple\"
+  $ cdap cli send stream purchases \"Tom,    5,       pear\"
+  $ cdap cli send stream purchases \"Alice, 12,      apple\"
+  $ cdap cli send stream purchases \"Alice,  6,     banana\"
+  $ cdap cli send stream purchases \"Bob,    2,     orange\"
+  $ cdap cli send stream purchases \"Bob,    1, watermelon\"
+  $ cdap cli send stream purchases \"Bob,   10,      apple\"
 
 Now that purchase events have been ingested by CDAP, they can be
 explored with a BI tool such as *Pentaho Data Integration*.
@@ -364,7 +364,7 @@ Have a question? Discuss at the `CDAP User Mailing List <https://groups.google.c
 License
 =======
 
-Copyright © 2014-2015 Cask Data, Inc.
+Copyright © 2014-2017 Cask Data, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may
 not use this file except in compliance with the License. You may obtain
