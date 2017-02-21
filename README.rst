@@ -336,8 +336,8 @@ a BI tool. Please continue to experiment and extend this sample application.
 Related Topics
 ==============
 
--   `Connecting to CDAP Datasets using CDAP JDBC driver 
-    <http://docs.cask.co/cdap/current/en/integrations/jdbc>`__
+-   `Connecting to CDAP Datasets using the CDAP JDBC driver 
+    <http://docs.cask.co/cdap/current/en/integrations/jdbc.html>`__
 -   `Pentaho Data Integration (Kettle) Tutorial
     <http://wiki.pentaho.com/display/EAI/Pentaho+Data+Integration+%28Kettle%29+Tutorial>`__
 
